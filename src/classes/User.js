@@ -1,7 +1,17 @@
 class User {
   constructor(userObj) {
-
+    this.id = userObj.id;
+    this.name = userObj.name;
+    this.bookings = [];
   }
+
+  addBookings(bookings) {
+    bookings.forEach(reservation => {
+      if (reservation.userID === this.id) {
+        this.bookings.push(reservation);
+      };
+    });
+  };
 };
 
 
