@@ -1,7 +1,94 @@
-body {
+/* body {
   background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-}
+} */
 
 /* font-family: 'Quicksand', sans-serif; */
 
 /* font-family: 'Nothing You Could Do', cursive; */
+
+
+/* Colors:
+- #A9C1D2 light steel blue
+- #FFFFFF plain white
+- #949D6A moss green
+- #2F2A3A raisin black */
+
+
+/* BODY  */
+* {
+  font-family: 'Quicksand', sans-serif;
+  margin: 0;
+}
+
+body {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-bookings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: auto;
+}
+
+h2 {
+  margin-top: 20px;
+  font-size: 30px;
+}
+
+
+/* HEADER  */
+h1 {
+  /* font-family: 'Nothing You Could Do', cursive; */
+  color: #2F2A3A;
+  font-size: 70px;
+  margin-bottom: 15px;
+}
+
+header {
+  background-color: #A9C1D2;
+  display: flex;
+  height: 20%;
+  width: 100%;
+  margin: 0;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+
+button {
+  background-color: #2F2A3A;
+  color: #FFFFFF;
+  border-radius: 5px;
+  border: none;
+  height: 40px;
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  background-color: #3b3549;
+  /* border-radius: 7px; */
+  transform: scale(1.02);
+  transition: .6s;
+}
+
+
+/* MAIN  */
+
+
+.hidden {
+  display: none;
+}
