@@ -1,7 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import User from '../src/classes/User';
-import {customers, bookings} from './data';
+import {customers, bookings, rooms} from './data';
 
 describe('User', () => {
   let user1, user2;
@@ -45,6 +45,23 @@ describe('User', () => {
     user2.addBookings(bookings);
     expect(user2.bookings[0]).to.deep.equal(bookings[1]);
     expect(user2.bookings[1]).to.deep.equal(bookings[2]);
+  });
+
+  it('each user should be able to keep track of the total amount of money they have spent on rooms', () => {
+
+    expect(user1.totalSpent).to.equal(0);
+
+    user1.addBookings(bookings);
+    user1.calculateTotalSpent(rooms);
+
+    expect(user1.totalSpent).to.equal(172.09);
+
+    expect(user2.totalSpent).to.equal(0);
+
+    user2.addBookings(bookings);
+    user2.calculateTotalSpent(rooms);
+
+    expect(user2.totalSpent).to.equal(871.08);
   });
 
 });

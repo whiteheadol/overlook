@@ -10,7 +10,7 @@ let customers = [
   {
     id: 3,
     name: "Kelvin Schiller"
-  },
+  }
 ];
 
 let bookings = [
@@ -31,7 +31,35 @@ let bookings = [
     userID: 2,
     date: "2022/01/24",
     roomNumber: 19
-  },
+  }
 ];
 
-export {customers, bookings};
+let rooms = [
+  {
+    number: 12,
+    roomType: "single room",
+    bidet: false,
+    bedSize: "twin",
+    numBeds: 2,
+    costPerNight: 172.09
+  },
+  {
+    number: 18,
+    roomType: "junior suite",
+    bidet: false,
+    bedSize: "king",
+    numBeds: 2,
+    costPerNight: 496.41
+  },
+  {
+    number: 19,
+    roomType: "single room",
+    bidet: false,
+    bedSize: "queen",
+    numBeds: 1,
+    costPerNight: 374.67
+  }
+];
+
+
+export {customers, bookings, rooms};

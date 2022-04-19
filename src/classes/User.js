@@ -3,6 +3,7 @@ class User {
     this.id = userObj.id;
     this.name = userObj.name;
     this.bookings = [];
+    this.totalSpent = 0;
   }
 
   addBookings(bookings) {
@@ -12,6 +13,17 @@ class User {
       };
     });
   };
+
+  calculateTotalSpent(rooms) {
+    rooms.forEach(room => {
+      this.bookings.forEach(booking => {
+        if (booking.roomNumber === room.number) {
+          this.totalSpent += room.costPerNight;
+        }
+      })
+    })
+  };
+
 };
 
 
