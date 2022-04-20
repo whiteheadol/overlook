@@ -1,6 +1,7 @@
 import chai from 'chai';
 const expect = chai.expect;
 import User from '../src/classes/User';
+import Room from '../src/classes/Room';
 import {customers, bookings, rooms} from './data';
 
 describe('User', () => {
@@ -53,6 +54,8 @@ describe('User', () => {
 
     user1.addBookingsIds(bookings);
     user1.addBookedRoomInfo(rooms);
+
+    expect(user1.bookedRoomsInfo[0]).to.be.an.instanceOf(Room);
 
     expect(user1.bookedRoomsInfo[0].number).to.equal(12);
     expect(user1.bookedRoomsInfo[0].type).to.equal('single room');
