@@ -35,8 +35,9 @@ let greeting = document.querySelector('.greeting');
 let browseGreeting = document.querySelector('.browse');
 let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
-let dateButton = document.querySelector('.date-button');
-
+let filterButton = document.querySelector('.filter-button');
+let possibleBookings = document.querySelector('.possible-bookings');
+let clearButton = document.querySelector('.clear-button');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -48,8 +49,10 @@ bookPageButton.addEventListener('click', function() {
   toggleBookPage();
 });
 
-dateButton.addEventListener('click', function() {
+filterButton.addEventListener('click', function() {
   findRoomsAvailByDate();
+  displayPossibleBookings();
+  showElement([clearButton]);
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -134,19 +137,41 @@ const findRoomsAvailByDate = () => {
   date = date.split('-');
   date = date.join('/');
   currentHotel.checkForRoomsByDate(date);
-  console.log(currentHotel);
 };
+
+const displayPossibleBookings = () => {
+  let bookingsHTML = "";
+  currentHotel.roomsAvailByDate.forEach((room) => {
+    bookingsHTML += `<div class="booking-thumbnail" id=${room.number}>
+                <div class="booking-info">
+                <p>room number: ${room.number}</p>
+                <p>room type: ${room.roomType}</p>
+                <p>number of beds: ${room.numBeds}</p>
+                <p>bed size: ${room.bedSize}</p>
+                <p>bidet: ${room.bidet}</p>
+                <p>cost per night: $${room.costPerNight}</p>
+                </div>
+                </div>`;
+  });
+
+  possibleBookings.innerHTML = bookingsHTML;
+};
+
 
 
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
 // Pseudocode for Wednesday:
-// Do research on date input in html
-// Find a way to capture data from this date input
 // Make a div for more thumbnails
 // Find a way to filter the data based on the date input value
 
 // Once functionality to filter by date, build out similar functionality to filter by roomType
 
 // Add event listener to date input - when a date is clicked, pull that input & populate thumbnails with all rooms that are available that day
+
+
+
+// When you hover over a specific room thumbnail on the bookings page,
+// allow a button to appear - saying 'book now'
+// Tie an event listener to this button taht will make a new instance of the room object and initiate a post to the bookings data!

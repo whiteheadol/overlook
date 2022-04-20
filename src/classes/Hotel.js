@@ -32,7 +32,7 @@ class Hotel {
     this.roomsAvailByDate = availOnDate;
   };
 
-  
+
 
 };
 

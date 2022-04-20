@@ -36,7 +36,7 @@ main {
   align-items: center;
 }
 
-.user-bookings {
+.user-bookings, .possible-bookings {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -63,6 +63,7 @@ h1 {
 h3 {
   font-size: 22px;
   margin-bottom: 5px;
+  margin-top: 105px;
 }
 
 h4 {
@@ -101,7 +102,7 @@ button {
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .search-fields {
@@ -113,6 +114,9 @@ label {
 
 .inputs {
   display: flex;
+  margin-bottom: 15px;
+  /* align-items: flex-end; */
+  /* justify-content: space-around; */
 }
 
 .calendar, .room-filter {
@@ -162,11 +166,16 @@ label {
   align-items: center;
 }
 
-.date-button, .room-button {
+.filter-button, .clear-button {
   padding: 5px;
-  height: 25px;
-  margin: 5px;
-  width: 50px;
+  height: 30px;
+  margin-top: 25px;
+  margin-left: 20px;
+  width: 60px;
+}
+
+.clear-button {
+  width: 120px;
 }
 
 .hidden {

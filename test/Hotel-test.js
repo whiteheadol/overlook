@@ -40,7 +40,7 @@ describe('Hotel', () => {
     expect(hotel.roomsAvailByType).to.deep.equal([]);
   });
 
-  it('should be able to check what rooms are available on a certain date', () => {
+  it('should be able to check what rooms are available on a certain date and store available rooms in a property', () => {
 
     hotel.checkForRoomsByDate('2022/01/09');
 
@@ -48,4 +48,5 @@ describe('Hotel', () => {
     expect(hotel.roomsAvailByDate[0]).to.equal(rooms[0]);
     expect(hotel.roomsAvailByDate[1]).to.equal(rooms[2]);
   });
+
 });
