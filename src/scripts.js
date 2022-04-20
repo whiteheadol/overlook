@@ -102,3 +102,11 @@ const displayBookedThumbnails = () => {
 };
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
+
+// Pseudocode for Wednesday:
+// Build out functionality for the 'book' button
+// Homepage will disappear, calendar information and blank page appear
+// Do research on date input in html
+// Find a way to capture data from this date input
+// Make a div for more thumbnails
+// Find a way to filter the data based on the date input value
