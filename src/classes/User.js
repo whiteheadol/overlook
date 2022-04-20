@@ -36,7 +36,6 @@ class User {
         room2.bookingID = room.id;
       })
     })
-    console.log(bookedRooms);
     this.bookedRoomsInfo = bookedRooms;
   };
 

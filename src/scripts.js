@@ -99,8 +99,6 @@ const displayBookedThumbnails = () => {
                 </div>`;
   });
   userBookingsThumbnails.innerHTML = bookingsHTML;
-  console.log(currentUser)
 };
 
-// Give each
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed

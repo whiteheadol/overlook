@@ -112,9 +112,11 @@ label {
   justify-content: center;
   margin: 20px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-  background-image: url('https://www.pexels.com/photo/body-of-water-under-blue-and-white-skies-1533720/');
+  background-image: url("../images/ocean.jpg");
+  background-size: cover;
 }
 
+/* Check with eli for frosting info? */
 .booking-info {
   display: flex;
   flex-direction: column;
