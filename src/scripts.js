@@ -24,6 +24,19 @@ let currentUser;
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
 window.onload = () =>{
+  loadWindow();
+};
+
+// Event Handlers and Functions ------------------------------------------------
+const showElement = elements => {
+  elements.forEach(element => element.classList.remove("hidden"));
+};
+
+const hideElement = elements => {
+  elements.forEach(element => element.classList.add("hidden"));
+};
+
+const loadWindow = () => {
   Promise.all(
     [
       usersPromise,
@@ -33,23 +46,27 @@ window.onload = () =>{
   )
   .then(jsonArray => {
     usersData = jsonArray[0];
-    bookingsData = jsonArray[1];
-    roomsData = jsonArray[2];
+    bookingsData = jsonArray[1].bookings;
+    roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
-    console.log(currentUser);
   })
+  .then(result => {
+    populateUserBookings(bookingsData);
+    findUserTotalCost(roomsData);
+    // console.log(currentUser);
+  });
 };
 
-// Event Handlers and Functions ------------------------------------------------
+const populateUserBookings = (bookings) => {
+  currentUser.addBookings(bookingsData);
+};
+
+const findUserTotalCost = (rooms) => {
+  currentUser.calculateTotalSpent(roomsData);
+};
 
 
-
-
-// Pushing the fetch branch
-// When I come back:
-// Instantiate current user
-// push the users bookings into their bookings array
-// Find the total amount of money the user has spent
 // Display money on DOM - probably change element a bit
 // Display static thumbnails by iterating through users bookings array
 // Figure out how to click on thumbnail and show more room information
+// Function to update span contents

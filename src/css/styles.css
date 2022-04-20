@@ -78,12 +78,12 @@ button {
   margin-bottom: 20px;
 }
 
-button:hover {
+/* button:hover {
   background-color: #3b3549;
-  /* border-radius: 7px; */
+  border-radius: 7px;
   transform: scale(1.02);
   transition: .6s;
-}
+} */
 
 
 /* MAIN  */
