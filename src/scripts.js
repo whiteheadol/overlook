@@ -21,6 +21,7 @@ let currentUser;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
+let userName = document.querySelector('.user-name');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -55,7 +56,7 @@ const loadWindow = () => {
     populateUserBookings(bookingsData);
     findUserTotalCost(roomsData);
     updateUserSum();
-    // console.log(currentUser);
+    updateUserName();
   });
 };
 
@@ -71,8 +72,12 @@ const updateUserSum = () => {
   userSum.innerText = currentUser.totalSpent;
 };
 
+const updateUserName = () => {
+  let name = currentUser.name.split(' ');
+  let firstName = name[0];
+  firstName = firstName.toLowerCase();
+  userName.innerText = firstName;
+};
 
-// Display money on DOM - probably change element a bit
 // Display static thumbnails by iterating through users bookings array
 // Figure out how to click on thumbnail and show more room information
-// Function to update span contents
