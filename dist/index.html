@@ -9,19 +9,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- <img src="./images/turing-logo.png" alt="turing logo"> -->
   <header>
-    <button>book now</button>
-    <h1>welcome, <span class="user-name"></span></h1>
+    <button class="book-page-button">book now</button>
+    <button class="home-page-button hidden">homepage</button>
+    <h1 class="greeting">welcome, <span class="user-name"></span></h1>
+    <h3 class="browse hidden">find your perfect room</h3>
     <div class="user-money">
       <label>you've spent:</label>
       <button class="user-total-spent"></button>
+    </div>
+    <div class="search-fields hidden">
+      <button></button>
     </div>
   </header>
   <main>
     <section class="homepage">
       <h2>your bookings:</h2>
       <div class="user-bookings"></div>
+    </section>
+    <section class="book-page hidden">
+      <h2 class="filter-subheading"></h2>
+      <div class="possible-bookings"></div>
     </section>
   </main>
   <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->

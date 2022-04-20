@@ -56,6 +56,12 @@ h1 {
   /* font-family: 'Nothing You Could Do', cursive; */
   color: #2F2A3A;
   font-size: 70px;
+  margin: 100px 100px 15px 100px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 40px;
   margin-bottom: 15px;
 }
 

@@ -21,14 +21,26 @@ let currentUser;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
+let userMoney = document.querySelector('.user-money');
 let userName = document.querySelector('.user-name');
 let userBookingsThumbnails = document.querySelector('.user-bookings');
+let bookPageButton = document.querySelector('.book-page-button');
+let homePageButton = document.querySelector('.home-page-button');
+let homePage = document.querySelector('.homepage');
+let bookPage = document.querySelector('.book-page');
+let greeting = document.querySelector('.greeting');
+let browseGreeting = document.querySelector('.browse');
+let searchFields = document.querySelector('.search-fields');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
 window.onload = () =>{
   loadWindow();
 };
+
+bookPageButton.addEventListener('click', function() {
+  toggleBookPage();
+});
 
 // Event Handlers and Functions ------------------------------------------------
 const showElement = elements => {
@@ -89,7 +101,6 @@ const updateRoomInfo = (rooms) => {
 const displayBookedThumbnails = () => {
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
-    console.log(booking);
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
                 <div class="booking-info">
                 <p>room number: ${booking.number}</p>
@@ -102,14 +113,18 @@ const displayBookedThumbnails = () => {
   userBookingsThumbnails.innerHTML = bookingsHTML;
 };
 
+const toggleBookPage = () => {
+  hideElement([bookPageButton, homePage, userMoney, greeting]);
+  showElement([homePageButton, bookPage, browseGreeting, searchFields]);
+};
+
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
 // Pseudocode for Wednesday:
-// Find and fix date & id bug - when displayed on DOM, the dates aren't updating correctly
-// The problem is in the user method - I'm not adding them correctly somehow
-// Build out functionality for the 'book' button
 // Homepage will disappear, calendar information and blank page appear
 // Do research on date input in html
 // Find a way to capture data from this date input
 // Make a div for more thumbnails
 // Find a way to filter the data based on the date input value
+
+// Once functionality to filter by date, build out similar functionality to filter by roomType
