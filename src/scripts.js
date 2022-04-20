@@ -32,11 +32,24 @@ window.onload = () =>{
     ]
   )
   .then(jsonArray => {
-    console.log(jsonArray);
     usersData = jsonArray[0];
     bookingsData = jsonArray[1];
     roomsData = jsonArray[2];
+    currentUser = new User(usersData);
+    console.log(currentUser);
   })
 };
 
 // Event Handlers and Functions ------------------------------------------------
+
+
+
+
+// Pushing the fetch branch
+// When I come back:
+// Instantiate current user
+// push the users bookings into their bookings array
+// Find the total amount of money the user has spent
+// Display money on DOM - probably change element a bit
+// Display static thumbnails by iterating through users bookings array
+// Figure out how to click on thumbnail and show more room information
