@@ -141,7 +141,7 @@ label {
 
 } */
 
-.booking-thumbnail {
+.booking-thumbnail, .to-book-thumbnail {
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -156,7 +156,7 @@ label {
 }
 
 /* Check with eli for frosting info? */
-.booking-info {
+.booking-info, .to-book-info, .book-button-display {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
@@ -164,7 +164,17 @@ label {
   padding: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   align-items: center;
+  width: 68%;
+  height: 60%;
+  justify-content: center;
 }
+
+.to-book-info:hover {
+  transform: scale(1.04);
+  transition: .6s;
+  opacity: 1;
+}
+
 
 .filter-button, .clear-button {
   padding: 5px;
@@ -176,6 +186,11 @@ label {
 
 .clear-button {
   width: 120px;
+}
+
+.book-button:hover {
+  transform: scale(1.04);
+  transition: .6s;
 }
 
 .hidden {

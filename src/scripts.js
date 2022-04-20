@@ -55,6 +55,14 @@ filterButton.addEventListener('click', function() {
   showElement([clearButton]);
 });
 
+possibleBookings.addEventListener('click', function(e) {
+  if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
+    console.log('ok');
+    console.log(e.target.id);
+    displayBookButton(e.target.id);
+  };
+});
+
 // Event Handlers and Functions ------------------------------------------------
 const showElement = elements => {
   elements.forEach(element => element.classList.remove("hidden"));
@@ -142,8 +150,8 @@ const findRoomsAvailByDate = () => {
 const displayPossibleBookings = () => {
   let bookingsHTML = "";
   currentHotel.roomsAvailByDate.forEach((room) => {
-    bookingsHTML += `<div class="booking-thumbnail" id=${room.number}>
-                <div class="booking-info">
+    bookingsHTML += `<div class="to-book-thumbnail">
+                <div class="to-book-info room${room.number}" id=${room.number}>
                 <p>room number: ${room.number}</p>
                 <p>room type: ${room.roomType}</p>
                 <p>number of beds: ${room.numBeds}</p>
@@ -151,26 +159,33 @@ const displayPossibleBookings = () => {
                 <p>bidet: ${room.bidet}</p>
                 <p>cost per night: $${room.costPerNight}</p>
                 </div>
+                <div class="book-button-display hidden button${room.number}">
+                  <button class="book-button">book now</button>
+                </div>
                 </div>`;
   });
 
   possibleBookings.innerHTML = bookingsHTML;
 };
 
+const displayBookButton = (id) => {
+  // let element = `.${id}`
+  let textToHide = document.querySelector(`.room${id}`);
+  let buttonToShow = document.querySelector(`.button${id}`)
+  console.log(buttonToShow.innerHTML);
+  hideElement([textToHide]);
+  showElement([buttonToShow]);
+};
 
 
+// If a thumbnail is clicked, hide that thumbnails booking info, show button
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
 // Pseudocode for Wednesday:
 // Make a div for more thumbnails
-// Find a way to filter the data based on the date input value
 
-// Once functionality to filter by date, build out similar functionality to filter by roomType
-
-// Add event listener to date input - when a date is clicked, pull that input & populate thumbnails with all rooms that are available that day
-
-
+// Once functionality to filter by date, build out similar functionality to filter by roomType - these should be able to stack on top of each other
 
 // When you hover over a specific room thumbnail on the bookings page,
 // allow a button to appear - saying 'book now'
