@@ -178,12 +178,8 @@ const displayBookButton = (id) => {
 };
 
 
-// If a thumbnail is clicked, hide that thumbnails booking info, show button
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
-
-// Pseudocode for Wednesday:
-// Make a div for more thumbnails
 
 // Once functionality to filter by date, build out similar functionality to filter by roomType - these should be able to stack on top of each other
 
