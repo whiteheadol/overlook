@@ -115,7 +115,7 @@ const displayBookedThumbnails = () => {
 
 const toggleBookPage = () => {
   hideElement([bookPageButton, homePage, userMoney, greeting]);
-  showElement([homePageButton, bookPage, browseGreeting, searchFields]);
+  showElement([homePageButton, bookPage, searchFields]);
 };
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed

@@ -61,7 +61,11 @@ h1 {
 }
 
 h3 {
-  font-size: 40px;
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+h4 {
   margin-bottom: 15px;
 }
 
@@ -85,6 +89,11 @@ button {
   margin-bottom: 20px;
 }
 
+.user-total-spent {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 .user-money {
   display: flex;
   flex-direction: column;
@@ -94,6 +103,25 @@ button {
 label {
   margin-bottom: 5px;
 }
+
+.search-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.inputs {
+  display: flex;
+}
+
+.calendar, .room-filter {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  /* margin-bottom: 15px; */
+}
+
 
 /* button:hover {
   background-color: #3b3549;

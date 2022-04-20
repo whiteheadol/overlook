@@ -13,13 +13,28 @@
     <button class="book-page-button">book now</button>
     <button class="home-page-button hidden">homepage</button>
     <h1 class="greeting">welcome, <span class="user-name"></span></h1>
-    <h3 class="browse hidden">find your perfect room</h3>
     <div class="user-money">
       <label>you've spent:</label>
-      <button class="user-total-spent"></button>
+      <p class="user-total-spent"></p>
     </div>
     <div class="search-fields hidden">
-      <button></button>
+      <h3>- search for your perfect room -</h3>
+      <h4>choose one of the following filters:</h4>
+      <div class="inputs">
+        <div class="calendar">
+          <label for="date-filter">choose a date:</label>
+          <input type="date" id="date-filter" name="night" value="2022-05-15" min="2021-09-23" max="2022-06-18">
+        </div>
+        <div class="room-filter">
+          <label for="room-type-dropdown">choose a roome type:</label>
+          <select id="select1" class="room-type-selection">
+            <option value="junior">junior suite</option>
+            <option value="residential">residential</option>
+            <option value="single">single room</option>
+            <option value="suite">suite</option>
+          </select>
+        </div>
+      </div>
     </div>
   </header>
   <main>
