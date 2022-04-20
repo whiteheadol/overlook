@@ -89,6 +89,7 @@ const updateRoomInfo = (rooms) => {
 const displayBookedThumbnails = () => {
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
+    console.log(booking);
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
                 <div class="booking-info">
                 <p>room number: ${booking.number}</p>
@@ -104,6 +105,8 @@ const displayBookedThumbnails = () => {
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
 // Pseudocode for Wednesday:
+// Find and fix date & id bug - when displayed on DOM, the dates aren't updating correctly
+// The problem is in the user method - I'm not adding them correctly somehow
 // Build out functionality for the 'book' button
 // Homepage will disappear, calendar information and blank page appear
 // Do research on date input in html
