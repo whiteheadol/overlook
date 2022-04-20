@@ -68,4 +68,13 @@ describe('Hotel', () => {
     expect(hotel.roomsAvailByDateAndType[0]).to.equal(rooms[0]);
   });
 
+  it('should not add rooms if they do not meet both criteria', () => {
+
+    hotel.checkForRoomsByDate('2022/01/09');
+    hotel.checkForRoomsByDateAndType('potato', '2022/01/09')
+
+    expect(hotel.roomsAvailByDateAndType.length).to.equal(0);
+    expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);
+  });
+
 });
