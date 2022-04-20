@@ -20,6 +20,7 @@ let roomsData;
 let currentUser;
 
 // Query Selectors -------------------------------------------------------------
+let userSum = document.querySelector('.user-total-spent');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -53,6 +54,7 @@ const loadWindow = () => {
   .then(result => {
     populateUserBookings(bookingsData);
     findUserTotalCost(roomsData);
+    updateUserSum();
     // console.log(currentUser);
   });
 };
@@ -63,6 +65,10 @@ const populateUserBookings = (bookings) => {
 
 const findUserTotalCost = (rooms) => {
   currentUser.calculateTotalSpent(roomsData);
+};
+
+const updateUserSum = () => {
+  userSum.innerText = currentUser.totalSpent;
 };
 
 

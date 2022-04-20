@@ -78,6 +78,16 @@ button {
   margin-bottom: 20px;
 }
 
+.user-money {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
 /* button:hover {
   background-color: #3b3549;
   border-radius: 7px;
