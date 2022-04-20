@@ -48,7 +48,7 @@ describe('User', () => {
     expect(user2.bookingsIds[1]).to.deep.equal(bookings[2]);
   });
 
-  it('each user should be able to store instances of the room class', () => {
+  it('each user should be able to store instances of the Room class', () => {
 
     expect(user1.bookedRoomsInfo).to.deep.equal([]);
 
@@ -56,6 +56,18 @@ describe('User', () => {
     user1.addBookedRoomInfo(rooms);
 
     expect(user1.bookedRoomsInfo[0]).to.be.an.instanceOf(Room);
+
+    user2.addBookingsIds(bookings);
+    user2.addBookedRoomInfo(rooms);
+
+    expect(user2.bookedRoomsInfo[0]).to.be.an.instanceOf(Room);
+    expect(user2.bookedRoomsInfo[1]).to.be.an.instanceOf(Room);
+  });
+
+  it('these stored instances of the Room class should include the appropriate room information as well as updated dates and bookingIds', () => {
+
+    user1.addBookingsIds(bookings);
+    user1.addBookedRoomInfo(rooms);
 
     expect(user1.bookedRoomsInfo[0].number).to.equal(12);
     expect(user1.bookedRoomsInfo[0].type).to.equal('single room');
