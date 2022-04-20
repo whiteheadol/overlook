@@ -8,7 +8,6 @@ class Hotel {
 
   checkForRoomsByDate(dateInput){
     let roomsBookedOnDay = [];
-    let allRoomNums = [];
     let notAvailOnDate = [];
     let availOnDate = [];
 
@@ -18,28 +17,23 @@ class Hotel {
       };
     });
 
-    this.allRooms.forEach(room => {
-      allRoomNums.push(room.number);
-    });
-
-    console.log(roomsBookedOnDay);
-
     roomsBookedOnDay.forEach(booking => {
       if (!notAvailOnDate.includes(booking.roomNumber)) {
         notAvailOnDate.push(booking.roomNumber);
-      }
-    })
+      };
+    });
 
-    console.log('not: ', notAvailOnDate);
+    this.allRooms.forEach(room => {
+      if (!notAvailOnDate.includes(room.number)) {
+        availOnDate.push(room);
+      };
+    });
 
-    // filter through all room numbers, if not in notAvailOnDate, push to availOnDate
-    // Iterate through availOnDate and rooms - push the room with that num into available rooms
-    // Make this an instance of room?
+    this.roomsAvailByDate = availOnDate;
   };
 
-  // Build out method to take in a date arg and check to see
-  // which room numbers are not booked for that day
-  // format of date arg: 2022-05-25
+  
+
 };
 
 export default Hotel;

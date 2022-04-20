@@ -49,7 +49,7 @@ bookPageButton.addEventListener('click', function() {
 });
 
 dateButton.addEventListener('click', function() {
-  findDateInput();
+  findRoomsAvailByDate();
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -129,18 +129,12 @@ const toggleBookPage = () => {
   showElement([homePageButton, bookPage, searchFields]);
 };
 
-const findDateInput = () => {
-  // console.log(dateInput.value);
-  // console.log(currentHotel);
+const findRoomsAvailByDate = () => {
   let date = dateInput.value;
-  // console.log(date);
   date = date.split('-');
-  // console.log(date);
   date = date.join('/');
-  // console.log(date);
-
-
   currentHotel.checkForRoomsByDate(date);
+  console.log(currentHotel);
 };
 
 
