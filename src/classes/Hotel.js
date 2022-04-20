@@ -3,7 +3,7 @@ class Hotel {
     this.allBookings = bookings;
     this.allRooms = rooms;
     this.roomsAvailByDate = [];
-    this.roomsAvailByType = [];
+    this.roomsAvailByDateAndType = [];
   };
 
   checkForRoomsByDate(dateInput){
@@ -30,9 +30,34 @@ class Hotel {
     });
 
     this.roomsAvailByDate = availOnDate;
+    this.roomsAvailByDateAndType = availOnDate;
   };
 
+  checkForRoomsByDateAndType(typeInput, dateInput) {
+    let availDateAndType = [];
 
+    if (typeInput === 'any') {
+      this.checkForRoomsByDate(dateInput)
+    } else if (typeInput === 'suite') {
+      this.roomsAvailByDate.forEach(room => {
+        if (room.roomType === 'suite') {
+          availDateAndType.push(room);
+          this.roomsAvailByDateAndType = availDateAndType;
+        }
+      });
+    } else if (typeInput === 'junior' || typeInput === 'residential' || typeInput === 'single') {
+      this.roomsAvailByDate.forEach(room => {
+        if (room.roomType.includes(typeInput)) {
+          availDateAndType.push(room);
+          this.roomsAvailByDateAndType = availDateAndType;
+        };
+      });
+    } else {
+      console.log('error');
+      // Come back and account for more error handling here
+    };
+
+  };
 
 };
 

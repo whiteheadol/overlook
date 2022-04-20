@@ -187,6 +187,16 @@ const displayBookButton = (id) => {
 
 // Once functionality to filter by date, build out similar functionality to filter by roomType - these should be able to stack on top of each other
 
+// Find a way to pull the input value from dropdown bar
+// Anywhere that currentHotel.checkForRoomsByDate is invoked, invoke new funtion instead. Refactor the DOM display to check this property of current hotel instead. Test this out in DOM
+
+
+
+
 // When you hover over a specific room thumbnail on the bookings page,
 // allow a button to appear - saying 'book now'
 // Tie an event listener to this button taht will make a new instance of the room object and initiate a post to the bookings data!
+
+
+
+// Revisit hover functionality to see if I want to hard code my bok button into the page instead of have it appear

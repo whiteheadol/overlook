@@ -37,7 +37,7 @@ describe('Hotel', () => {
 
   it('should be able to store rooms available by a room type', () => {
 
-    expect(hotel.roomsAvailByType).to.deep.equal([]);
+    expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);
   });
 
   it('should be able to check what rooms are available on a certain date and store available rooms in a property', () => {
@@ -47,6 +47,25 @@ describe('Hotel', () => {
     expect(hotel.roomsAvailByDate.length).to.equal(2);
     expect(hotel.roomsAvailByDate[0]).to.equal(rooms[0]);
     expect(hotel.roomsAvailByDate[1]).to.equal(rooms[2]);
+  });
+
+  it('should be able to check what rooms are available on a certain date and any type', () => {
+
+    hotel.checkForRoomsByDate('2022/01/09');
+    hotel.checkForRoomsByDateAndType('any', '2022/01/09')
+
+    expect(hotel.roomsAvailByDateAndType.length).to.equal(2);
+    expect(hotel.roomsAvailByDateAndType[0]).to.equal(rooms[0]);
+    expect(hotel.roomsAvailByDateAndType[1]).to.equal(rooms[2]);
+  });
+
+  it('should be able to check what rooms are available on a certain date and of a certain type', () => {
+
+    hotel.checkForRoomsByDate('2022/01/09');
+    hotel.checkForRoomsByDateAndType('single', '2022/01/09')
+
+    expect(hotel.roomsAvailByDateAndType.length).to.equal(1);
+    expect(hotel.roomsAvailByDateAndType[0]).to.equal(rooms[0]);
   });
 
 });
