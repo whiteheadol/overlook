@@ -45,8 +45,9 @@ main {
 }
 
 h2 {
-  margin-top: 20px;
+  margin: 40px 0px 40px 0px;
   font-size: 30px;
+  text-align: center;
 }
 
 
@@ -97,7 +98,32 @@ label {
 
 
 /* MAIN  */
+/* .user-bookings {
 
+} */
+
+.booking-thumbnail {
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  width: 300px;
+  background-color: #A9C1D2;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  background-image: url('https://www.pexels.com/photo/body-of-water-under-blue-and-white-skies-1533720/');
+}
+
+.booking-info {
+  display: flex;
+  flex-direction: column;
+  background-color: #FFFFFF;
+  opacity: 0.8;
+  padding: 10px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  align-items: center;
+}
 
 .hidden {
   display: none;

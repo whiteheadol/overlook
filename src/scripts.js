@@ -22,6 +22,7 @@ let currentUser;
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
 let userName = document.querySelector('.user-name');
+let userBookingsThumbnails = document.querySelector('.user-bookings');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -54,14 +55,16 @@ const loadWindow = () => {
   })
   .then(result => {
     populateUserBookings(bookingsData);
+    updateRoomInfo(roomsData);
     findUserTotalCost(roomsData);
     updateUserSum();
     updateUserName();
+    displayBookedThumbnails();
   });
 };
 
 const populateUserBookings = (bookings) => {
-  currentUser.addBookings(bookingsData);
+  currentUser.addBookingsIds(bookingsData);
 };
 
 const findUserTotalCost = (rooms) => {
@@ -69,7 +72,7 @@ const findUserTotalCost = (rooms) => {
 };
 
 const updateUserSum = () => {
-  userSum.innerText = currentUser.totalSpent;
+  userSum.innerText = `$${currentUser.totalSpent}`;
 };
 
 const updateUserName = () => {
@@ -79,5 +82,25 @@ const updateUserName = () => {
   userName.innerText = firstName;
 };
 
-// Display static thumbnails by iterating through users bookings array
-// Figure out how to click on thumbnail and show more room information
+const updateRoomInfo = (rooms) => {
+  currentUser.addBookedRoomInfo(rooms);
+};
+
+const displayBookedThumbnails = () => {
+  let bookingsHTML = "";
+  currentUser.bookedRoomsInfo.forEach((booking) => {
+    bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
+                <div class="booking-info">
+                <p>room number: ${booking.number}</p>
+                <p>date: ${booking.date}</p>
+                <p>room type: ${booking.type}</p>
+                <p>cost per night: $${booking.costPerNight}</p>
+                </div>
+                </div>`;
+  });
+  userBookingsThumbnails.innerHTML = bookingsHTML;
+  console.log(currentUser)
+};
+
+// Give each
+// Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
