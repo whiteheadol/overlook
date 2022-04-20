@@ -20,10 +20,26 @@ let roomsData;
 let currentUser;
 
 // Query Selectors -------------------------------------------------------------
+let userSum = document.querySelector('.user-total-spent');
+let userName = document.querySelector('.user-name');
+let userBookingsThumbnails = document.querySelector('.user-bookings');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
 window.onload = () =>{
+  loadWindow();
+};
+
+// Event Handlers and Functions ------------------------------------------------
+const showElement = elements => {
+  elements.forEach(element => element.classList.remove("hidden"));
+};
+
+const hideElement = elements => {
+  elements.forEach(element => element.classList.add("hidden"));
+};
+
+const loadWindow = () => {
   Promise.all(
     [
       usersPromise,
@@ -33,23 +49,64 @@ window.onload = () =>{
   )
   .then(jsonArray => {
     usersData = jsonArray[0];
-    bookingsData = jsonArray[1];
-    roomsData = jsonArray[2];
+    bookingsData = jsonArray[1].bookings;
+    roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
-    console.log(currentUser);
   })
+  .then(result => {
+    populateUserBookings(bookingsData);
+    updateRoomInfo(roomsData);
+    findUserTotalCost(roomsData);
+    updateUserSum();
+    updateUserName();
+    displayBookedThumbnails();
+  });
 };
 
-// Event Handlers and Functions ------------------------------------------------
+const populateUserBookings = (bookings) => {
+  currentUser.addBookingsIds(bookingsData);
+};
 
+const findUserTotalCost = (rooms) => {
+  currentUser.calculateTotalSpent(roomsData);
+};
 
+const updateUserSum = () => {
+  userSum.innerText = `$${currentUser.totalSpent}`;
+};
 
+const updateUserName = () => {
+  let name = currentUser.name.split(' ');
+  let firstName = name[0];
+  firstName = firstName.toLowerCase();
+  userName.innerText = firstName;
+};
 
-// Pushing the fetch branch
-// When I come back:
-// Instantiate current user
-// push the users bookings into their bookings array
-// Find the total amount of money the user has spent
-// Display money on DOM - probably change element a bit
-// Display static thumbnails by iterating through users bookings array
-// Figure out how to click on thumbnail and show more room information
+const updateRoomInfo = (rooms) => {
+  currentUser.addBookedRoomInfo(rooms);
+};
+
+const displayBookedThumbnails = () => {
+  let bookingsHTML = "";
+  currentUser.bookedRoomsInfo.forEach((booking) => {
+    bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
+                <div class="booking-info">
+                <p>room number: ${booking.number}</p>
+                <p>date: ${booking.date}</p>
+                <p>room type: ${booking.type}</p>
+                <p>cost per night: $${booking.costPerNight}</p>
+                </div>
+                </div>`;
+  });
+  userBookingsThumbnails.innerHTML = bookingsHTML;
+};
+
+// Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
+
+// Pseudocode for Wednesday:
+// Build out functionality for the 'book' button
+// Homepage will disappear, calendar information and blank page appear
+// Do research on date input in html
+// Find a way to capture data from this date input
+// Make a div for more thumbnails
+// Find a way to filter the data based on the date input value

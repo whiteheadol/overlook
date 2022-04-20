@@ -1,27 +1,54 @@
+import Room from "./Room.js";
+
 class User {
   constructor(userObj) {
     this.id = userObj.id;
     this.name = userObj.name;
-    this.bookings = [];
+    this.bookingsIds = [];
+    this.bookedRoomsInfo = [];
     this.totalSpent = 0;
   }
 
-  addBookings(bookings) {
+  addBookingsIds(bookings) {
     bookings.forEach(reservation => {
       if (reservation.userID === this.id) {
-        this.bookings.push(reservation);
+        this.bookingsIds.push(reservation);
       };
     });
   };
 
-  calculateTotalSpent(rooms) {
+  // Test this
+  addBookedRoomInfo(rooms) {
+    let allRooms = [];
+    let bookedRooms = [];
+
     rooms.forEach(room => {
-      this.bookings.forEach(booking => {
-        if (booking.roomNumber === room.number) {
-          this.totalSpent += room.costPerNight;
+      allRooms.push(new Room(room));
+    });
+
+    this.bookingsIds.forEach(room => {
+      allRooms.forEach(room2 => {
+        if (room.roomNumber === room2.number) {
+          bookedRooms.push(room2);
         }
+        room2.date = room.date;
+        // Number(room2.date);
+        room2.bookingID = room.id;
       })
     })
+    this.bookedRoomsInfo = bookedRooms;
+  };
+
+  calculateTotalSpent(rooms) {
+    rooms.forEach(room => {
+      this.bookingsIds.forEach(booking => {
+        if (booking.roomNumber === room.number) {
+          this.totalSpent += room.costPerNight;
+        };
+      });
+    });
+    this.totalSpent = this.totalSpent.toFixed(2);
+    this.totalSpent = Number(this.totalSpent);
   };
 
 };
