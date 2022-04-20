@@ -5,7 +5,51 @@
 import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
+// import './images/turing-logo.png'
 
 
-console.log('This is the JavaScript entry file - your code begins here.');
+// console.log('This is the JavaScript entry file - your code begins here.');
+
+import {usersPromise, bookingsPromise, roomsPromise} from "./apiCalls";
+import User from "./classes/User.js";
+
+// Variables -------------------------------------------------------------------
+let usersData;
+let bookingsData;
+let roomsData;
+let currentUser;
+
+// Query Selectors -------------------------------------------------------------
+
+// Event Listeners -------------------------------------------------------------
+// Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
+window.onload = () =>{
+  Promise.all(
+    [
+      usersPromise,
+      bookingsPromise,
+      roomsPromise
+    ]
+  )
+  .then(jsonArray => {
+    usersData = jsonArray[0];
+    bookingsData = jsonArray[1];
+    roomsData = jsonArray[2];
+    currentUser = new User(usersData);
+    console.log(currentUser);
+  })
+};
+
+// Event Handlers and Functions ------------------------------------------------
+
+
+
+
+// Pushing the fetch branch
+// When I come back:
+// Instantiate current user
+// push the users bookings into their bookings array
+// Find the total amount of money the user has spent
+// Display money on DOM - probably change element a bit
+// Display static thumbnails by iterating through users bookings array
+// Figure out how to click on thumbnail and show more room information
