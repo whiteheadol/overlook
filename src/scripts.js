@@ -12,12 +12,15 @@ import './css/styles.css';
 
 import {usersPromise, bookingsPromise, roomsPromise} from "./apiCalls";
 import User from "./classes/User.js";
+import Hotel from "./classes/Hotel.js";
+
 
 // Variables -------------------------------------------------------------------
 let usersData;
 let bookingsData;
 let roomsData;
 let currentUser;
+let currentHotel;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -34,7 +37,6 @@ let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let dateButton = document.querySelector('.date-button');
 
-// var dateControl = document.querySelector('input[type="date"]');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -72,6 +74,7 @@ const loadWindow = () => {
     bookingsData = jsonArray[1].bookings;
     roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
+    currentHotel = new Hotel(bookingsData, roomsData)
   })
   .then(result => {
     populateUserBookings(bookingsData);
@@ -127,12 +130,19 @@ const toggleBookPage = () => {
 };
 
 const findDateInput = () => {
-  console.log(dateInput.value);
+  // console.log(dateInput.value);
+  // console.log(currentHotel);
+  let date = dateInput.value;
+  // console.log(date);
+  date = date.split('-');
+  // console.log(date);
+  date = date.join('/');
+  // console.log(date);
+
+
+  currentHotel.checkForRoomsByDate(date);
 };
 
-// var dateControl = document.querySelector('input[type="date"]');
-// dateControl.value = '2017-06-01';
-// console.log(dateControl.value); // prints "2017-06-01"
 
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
