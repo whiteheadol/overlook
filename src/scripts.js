@@ -31,6 +31,10 @@ let bookPage = document.querySelector('.book-page');
 let greeting = document.querySelector('.greeting');
 let browseGreeting = document.querySelector('.browse');
 let searchFields = document.querySelector('.search-fields');
+let dateInput = document.querySelector('input[type="date"]');
+let dateButton = document.querySelector('.date-button');
+
+// var dateControl = document.querySelector('input[type="date"]');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -40,6 +44,10 @@ window.onload = () =>{
 
 bookPageButton.addEventListener('click', function() {
   toggleBookPage();
+});
+
+dateButton.addEventListener('click', function() {
+  findDateInput();
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -118,13 +126,23 @@ const toggleBookPage = () => {
   showElement([homePageButton, bookPage, searchFields]);
 };
 
+const findDateInput = () => {
+  console.log(dateInput.value);
+};
+
+// var dateControl = document.querySelector('input[type="date"]');
+// dateControl.value = '2017-06-01';
+// console.log(dateControl.value); // prints "2017-06-01"
+
+
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
 // Pseudocode for Wednesday:
-// Homepage will disappear, calendar information and blank page appear
 // Do research on date input in html
 // Find a way to capture data from this date input
 // Make a div for more thumbnails
 // Find a way to filter the data based on the date input value
 
 // Once functionality to filter by date, build out similar functionality to filter by roomType
+
+// Add event listener to date input - when a date is clicked, pull that input & populate thumbnails with all rooms that are available that day
