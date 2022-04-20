@@ -30,14 +30,16 @@ class Hotel {
     });
 
     this.roomsAvailByDate = availOnDate;
-    this.roomsAvailByDateAndType = availOnDate;
+    // this.roomsAvailByDateAndType = availOnDate;
   };
 
   checkForRoomsByDateAndType(typeInput, dateInput) {
     let availDateAndType = [];
 
+    this.checkForRoomsByDate(dateInput);
+
     if (typeInput === 'any') {
-      this.checkForRoomsByDate(dateInput)
+      this.roomsAvailByDateAndType = this.roomsAvailByDate;
     } else if (typeInput === 'suite') {
       this.roomsAvailByDate.forEach(room => {
         if (room.roomType === 'suite') {
@@ -46,6 +48,7 @@ class Hotel {
         }
       });
     } else if (typeInput === 'junior' || typeInput === 'residential' || typeInput === 'single') {
+      console.log('j', typeInput);
       this.roomsAvailByDate.forEach(room => {
         if (room.roomType.includes(typeInput)) {
           availDateAndType.push(room);

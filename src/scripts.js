@@ -37,7 +37,7 @@ let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
-let clearButton = document.querySelector('.clear-button');
+// let clearButton = document.querySelector('.clear-button');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -50,15 +50,15 @@ bookPageButton.addEventListener('click', function() {
 });
 
 filterButton.addEventListener('click', function() {
-  findRoomsAvailByDate();
+  findRoomsAvail();
   displayPossibleBookings();
-  showElement([clearButton]);
+  // showElement([clearButton]);
 });
 
 possibleBookings.addEventListener('click', function(e) {
   if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
-    console.log('ok');
-    console.log(e.target.id);
+    // console.log('ok');
+    // console.log(e.target.id);
     displayBookButton(e.target.id);
   };
 });
@@ -140,16 +140,18 @@ const toggleBookPage = () => {
   showElement([homePageButton, bookPage, searchFields]);
 };
 
-const findRoomsAvailByDate = () => {
+const findRoomsAvail = () => {
   let date = dateInput.value;
   date = date.split('-');
   date = date.join('/');
-  currentHotel.checkForRoomsByDate(date);
+  let type = document.querySelector('#select1');
+  type = type.value;
+  currentHotel.checkForRoomsByDateAndType(type, date);
 };
 
 const displayPossibleBookings = () => {
   let bookingsHTML = "";
-  currentHotel.roomsAvailByDate.forEach((room) => {
+  currentHotel.roomsAvailByDateAndType.forEach((room) => {
     bookingsHTML += `<div class="to-book-thumbnail">
                 <div class="to-book-info room${room.number}" id=${room.number}>
                 <p>room number: ${room.number}</p>
@@ -181,18 +183,12 @@ const displayBookButton = (id) => {
 
 // Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
 
-// Once functionality to filter by date, build out similar functionality to filter by roomType - these should be able to stack on top of each other
-
-// Find a way to pull the input value from dropdown bar
-// Anywhere that currentHotel.checkForRoomsByDate is invoked, invoke new funtion instead. Refactor the DOM display to check this property of current hotel instead. Test this out in DOM
-
-
-
 
 // When you hover over a specific room thumbnail on the bookings page,
 // allow a button to appear - saying 'book now'
-// Tie an event listener to this button taht will make a new instance of the room object and initiate a post to the bookings data!
+// Tie an event listener to this button that will make a new instance of the room object and initiate a post to the bookings data!
 
+// Add an event listener to the element with .book-button-display to toggle back to the room details
 
 
 // Revisit hover functionality to see if I want to hard code my bok button into the page instead of have it appear
