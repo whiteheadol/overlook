@@ -37,7 +37,6 @@ let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
-// let clearButton = document.querySelector('.clear-button');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -52,13 +51,10 @@ bookPageButton.addEventListener('click', function() {
 filterButton.addEventListener('click', function() {
   findRoomsAvail();
   displayPossibleBookings();
-  // showElement([clearButton]);
 });
 
 possibleBookings.addEventListener('click', function(e) {
   if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
-    // console.log('ok');
-    // console.log(e.target.id);
     displayBookButton(e.target.id);
   };
 });
@@ -180,15 +176,12 @@ const displayBookButton = (id) => {
 };
 
 
+// Pseudocode goals for Thursday:
 
-// Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
+// On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
 
+// On the bookings page:
+// Tie an event listener to the 'book' button that will make a new instance of the room object and initiate a post to the bookings data!
+// Add an event listener to the element with .book-button-display class to toggle back to the room details. Should be able to toggle between the room details and the button that allows you to book
 
-// When you hover over a specific room thumbnail on the bookings page,
-// allow a button to appear - saying 'book now'
-// Tie an event listener to this button that will make a new instance of the room object and initiate a post to the bookings data!
-
-// Add an event listener to the element with .book-button-display to toggle back to the room details
-
-
-// Revisit hover functionality to see if I want to hard code my bok button into the page instead of have it appear
+// Revisit hover functionality to see if I want to hard code my book button into the page instead of have it appear. I see benefits to both, want to evaluate the UI
