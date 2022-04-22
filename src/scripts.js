@@ -12,23 +12,52 @@ import './css/styles.css';
 
 import {usersPromise, bookingsPromise, roomsPromise} from "./apiCalls";
 import User from "./classes/User.js";
+import Hotel from "./classes/Hotel.js";
+
 
 // Variables -------------------------------------------------------------------
 let usersData;
 let bookingsData;
 let roomsData;
 let currentUser;
+let currentHotel;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
+let userMoney = document.querySelector('.user-money');
 let userName = document.querySelector('.user-name');
 let userBookingsThumbnails = document.querySelector('.user-bookings');
+let bookPageButton = document.querySelector('.book-page-button');
+let homePageButton = document.querySelector('.home-page-button');
+let homePage = document.querySelector('.homepage');
+let bookPage = document.querySelector('.book-page');
+let greeting = document.querySelector('.greeting');
+let browseGreeting = document.querySelector('.browse');
+let searchFields = document.querySelector('.search-fields');
+let dateInput = document.querySelector('input[type="date"]');
+let filterButton = document.querySelector('.filter-button');
+let possibleBookings = document.querySelector('.possible-bookings');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
 window.onload = () =>{
   loadWindow();
 };
+
+bookPageButton.addEventListener('click', function() {
+  toggleBookPage();
+});
+
+filterButton.addEventListener('click', function() {
+  findRoomsAvail();
+  displayPossibleBookings();
+});
+
+possibleBookings.addEventListener('click', function(e) {
+  if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
+    displayBookButton(e.target.id);
+  };
+});
 
 // Event Handlers and Functions ------------------------------------------------
 const showElement = elements => {
@@ -52,6 +81,7 @@ const loadWindow = () => {
     bookingsData = jsonArray[1].bookings;
     roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
+    currentHotel = new Hotel(bookingsData, roomsData)
   })
   .then(result => {
     populateUserBookings(bookingsData);
@@ -89,7 +119,6 @@ const updateRoomInfo = (rooms) => {
 const displayBookedThumbnails = () => {
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
-    console.log(booking);
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
                 <div class="booking-info">
                 <p>room number: ${booking.number}</p>
@@ -102,14 +131,57 @@ const displayBookedThumbnails = () => {
   userBookingsThumbnails.innerHTML = bookingsHTML;
 };
 
-// Figure out how to check if the date has already passed and change the opacity of the thumbnail for bookings that have already passed
+const toggleBookPage = () => {
+  hideElement([bookPageButton, homePage, userMoney, greeting]);
+  showElement([homePageButton, bookPage, searchFields]);
+};
 
-// Pseudocode for Wednesday:
-// Find and fix date & id bug - when displayed on DOM, the dates aren't updating correctly
-// The problem is in the user method - I'm not adding them correctly somehow
-// Build out functionality for the 'book' button
-// Homepage will disappear, calendar information and blank page appear
-// Do research on date input in html
-// Find a way to capture data from this date input
-// Make a div for more thumbnails
-// Find a way to filter the data based on the date input value
+const findRoomsAvail = () => {
+  let date = dateInput.value;
+  date = date.split('-');
+  date = date.join('/');
+  let type = document.querySelector('#select1');
+  type = type.value;
+  currentHotel.checkForRoomsByDateAndType(type, date);
+};
+
+const displayPossibleBookings = () => {
+  let bookingsHTML = "";
+  currentHotel.roomsAvailByDateAndType.forEach((room) => {
+    bookingsHTML += `<div class="to-book-thumbnail">
+                <div class="to-book-info room${room.number}" id=${room.number}>
+                <p>room number: ${room.number}</p>
+                <p>room type: ${room.roomType}</p>
+                <p>number of beds: ${room.numBeds}</p>
+                <p>bed size: ${room.bedSize}</p>
+                <p>bidet: ${room.bidet}</p>
+                <p>cost per night: $${room.costPerNight}</p>
+                </div>
+                <div class="book-button-display hidden button${room.number}">
+                  <button class="book-button">book now</button>
+                </div>
+                </div>`;
+  });
+
+  possibleBookings.innerHTML = bookingsHTML;
+};
+
+const displayBookButton = (id) => {
+  // let element = `.${id}`
+  let textToHide = document.querySelector(`.room${id}`);
+  let buttonToShow = document.querySelector(`.button${id}`)
+  console.log(buttonToShow.innerHTML);
+  hideElement([textToHide]);
+  showElement([buttonToShow]);
+};
+
+
+// Pseudocode goals for Thursday:
+
+// On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
+
+// On the bookings page:
+// Tie an event listener to the 'book' button that will make a new instance of the room object and initiate a post to the bookings data!
+// Add an event listener to the element with .book-button-display class to toggle back to the room details. Should be able to toggle between the room details and the button that allows you to book
+
+// Revisit hover functionality to see if I want to hard code my book button into the page instead of have it appear. I see benefits to both, want to evaluate the UI

@@ -42,7 +42,10 @@ describe('Hotel', () => {
 
   it('should be able to check what rooms are available on a certain date and store available rooms in a property', () => {
 
+<<<<<<< HEAD
     //Sad: test different date with no availbility
+=======
+>>>>>>> 9e2cb090d4e94d515fd259acaff70e3f05498216
     hotel.checkForRoomsByDate('2022/01/09');
 
     expect(hotel.roomsAvailByDate.length).to.equal(2);

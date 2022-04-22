@@ -30,12 +30,11 @@ class User {
       allRooms.forEach(room2 => {
         if (room.roomNumber === room2.number) {
           bookedRooms.push(room2);
+          room2.date = room.date;
+          room2.bookingID = room.id;
         }
-        room2.date = room.date;
-        // Number(room2.date);
-        room2.bookingID = room.id;
-      })
-    })
+      });
+    });
     this.bookedRoomsInfo = bookedRooms;
   };
 

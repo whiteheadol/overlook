@@ -36,7 +36,7 @@ main {
   align-items: center;
 }
 
-.user-bookings {
+.user-bookings, .possible-bookings {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -56,13 +56,24 @@ h1 {
   /* font-family: 'Nothing You Could Do', cursive; */
   color: #2F2A3A;
   font-size: 70px;
+  margin: 100px 100px 15px 100px;
+  text-align: center;
+}
+
+h3 {
+  font-size: 22px;
+  margin-bottom: 5px;
+  margin-top: 105px;
+}
+
+h4 {
   margin-bottom: 15px;
 }
 
 header {
   background-color: #A9C1D2;
   display: flex;
-  height: 20%;
+  height: 24%;
   width: 100%;
   margin: 0;
   justify-content: space-around;
@@ -79,6 +90,11 @@ button {
   margin-bottom: 20px;
 }
 
+.user-total-spent {
+  font-size: 20px;
+  margin-bottom: 15px;
+}
+
 .user-money {
   display: flex;
   flex-direction: column;
@@ -86,7 +102,30 @@ button {
 }
 
 label {
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+}
+
+.search-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: -5px;
+}
+
+.inputs {
+  display: flex;
+  margin-bottom: 15px;
+  /* align-items: flex-end; */
+  /* justify-content: space-around; */
+}
+
+.calendar, .room-filter {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  align-items: center;
+  justify-content: flex-start;
+  /* margin-bottom: 15px; */
 }
 
 /* button:hover {
@@ -102,7 +141,7 @@ label {
 
 } */
 
-.booking-thumbnail {
+.booking-thumbnail, .to-book-thumbnail {
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -117,7 +156,7 @@ label {
 }
 
 /* Check with eli for frosting info? */
-.booking-info {
+.booking-info, .to-book-info, .book-button-display {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
@@ -125,6 +164,33 @@ label {
   padding: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   align-items: center;
+  width: 68%;
+  height: 60%;
+  justify-content: center;
+}
+
+.to-book-info:hover {
+  transform: scale(1.04);
+  transition: .6s;
+  opacity: 1;
+}
+
+
+.filter-button, .clear-button {
+  padding: 5px;
+  height: 30px;
+  margin-top: 25px;
+  margin-left: 20px;
+  width: 60px;
+}
+
+.clear-button {
+  width: 120px;
+}
+
+.book-button:hover {
+  transform: scale(1.04);
+  transition: .6s;
 }
 
 .hidden {

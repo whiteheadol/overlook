@@ -53,7 +53,7 @@ let rooms = [
   },
   {
     number: 19,
-    roomType: "single room",
+    roomType: "residential suite",
     bidet: false,
     bedSize: "queen",
     numBeds: 1,
