@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -69,9 +69,9 @@ possibleBookings.addEventListener('click', function(e) {
   //   displayBookButton(e.target.id);
   // };
   if (e.target.classList.contains('book-button')) {
-    console.log(currentHotel);
-    postToBookings(e.target.id);
+    // console.log(currentHotel);
     updateBookingText(e.target.id);
+    postToBookings(e.target.id);
   }
 });
 
@@ -222,7 +222,14 @@ const updateBookingText = (id) => {
 };
 
 const postToBookings = (id) => {
-  
+  let date = dateInput.value;
+  date = date.split('-');
+  date = date.join('/');
+  let roomNumber = findIdHelper(id);
+  roomNumber = Number(roomNumber);
+  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
+  // console.log('obj:', obj);
+  postBooking(obj);
 };
 
 // What info to pass into post?

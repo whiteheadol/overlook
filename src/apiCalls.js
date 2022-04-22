@@ -13,7 +13,7 @@ let bookingsPromise = getPromise(`http://localhost:3001/api/v1/bookings`);
 let roomsPromise = getPromise(`http://localhost:3001/api/v1/rooms`);
 
 let postBooking = (bookingObj) => {
-  fetch(bookinUrlHere, {
+  fetch('http://localhost:3001/api/v1/bookings', {
     method: 'POST',
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(bookingObj)
@@ -26,7 +26,7 @@ let postBooking = (bookingObj) => {
     }
   })
   .then((booking) => {
-    console.log(booking)
+    console.log('worked:', booking)
     // will have to use this response to get the id and figure out what to do from there
     // just want to view it for now, before deciding how to procede
   })
