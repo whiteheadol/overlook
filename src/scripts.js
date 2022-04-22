@@ -203,10 +203,6 @@ const findIdHelper = (id) => {
   return finalId;
 };
 
-const postToBookings = (id) => {
-
-};
-
 const updateBookingText = (id) => {
   let newId = findIdHelper(id);
   let textToChange = document.getElementById(`${newId}`);
@@ -223,6 +219,10 @@ const updateBookingText = (id) => {
 
     // Rerun the methods to update rooms available by date and type?
   // Set time out to refresh booking page?
+};
+
+const postToBookings = (id) => {
+  
 };
 
 // What info to pass into post?
