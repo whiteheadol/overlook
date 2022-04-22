@@ -183,6 +183,12 @@ label {
   opacity: 1;
 } */
 
+.booked {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 15px;
+}
+
 .filter-button, .clear-button {
   padding: 5px;
   height: 30px;
@@ -191,9 +197,9 @@ label {
   width: 60px;
 }
 
-.clear-button {
+/* .clear-button {
   width: 120px;
-}
+} */
 
 .book-button {
   margin-top: 15px;
