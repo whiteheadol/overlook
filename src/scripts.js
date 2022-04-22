@@ -54,9 +54,12 @@ filterButton.addEventListener('click', function() {
 });
 
 possibleBookings.addEventListener('click', function(e) {
-  if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
-    displayBookButton(e.target.id);
-  };
+  // if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
+  //   displayBookButton(e.target.id);
+  // };
+  if (e.target.classList.contains('book-button')) {
+    console.log(currentHotel);
+  }
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -157,23 +160,23 @@ const displayPossibleBookings = () => {
                 <p>bidet: ${room.bidet}</p>
                 <p>cost per night: $${room.costPerNight}</p>
                 </div>
-                <div class="book-button-display hidden button${room.number}">
-                  <button class="book-button">book now</button>
-                </div>
+                <button class="book-button button${room.number}">book now</button>
                 </div>`;
   });
 
   possibleBookings.innerHTML = bookingsHTML;
 };
 
-const displayBookButton = (id) => {
-  // let element = `.${id}`
-  let textToHide = document.querySelector(`.room${id}`);
-  let buttonToShow = document.querySelector(`.button${id}`)
-  console.log(buttonToShow.innerHTML);
-  hideElement([textToHide]);
-  showElement([buttonToShow]);
-};
+// const displayBookButton = (id) => {
+//   // let element = `.${id}`
+//   let textToHide = document.querySelector(`.room${id}`);
+//   let buttonToShow = document.querySelector(`.button${id}`)
+//   console.log(buttonToShow.innerHTML);
+//   hideElement([textToHide]);
+//   showElement([buttonToShow]);
+// };
+
+// function to make post request and confirm booking
 
 
 // Pseudocode goals for Thursday:
