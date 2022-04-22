@@ -32,11 +32,14 @@ let homePageButton = document.querySelector('.home-page-button');
 let homePage = document.querySelector('.homepage');
 let bookPage = document.querySelector('.book-page');
 let greeting = document.querySelector('.greeting');
+// do i need the selector below?
 let browseGreeting = document.querySelector('.browse');
 let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
+let emptySearchMessage = document.querySelector('.filter-subheading');
+let followUp = document.querySelector('.followup');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -46,6 +49,7 @@ window.onload = () =>{
 
 bookPageButton.addEventListener('click', function() {
   toggleBookPage();
+  console.log(currentUser);
 });
 
 homePageButton.addEventListener('click', function() {
@@ -162,7 +166,9 @@ const findRoomsAvail = () => {
 };
 
 const displayPossibleBookings = () => {
-  let bookingsHTML = "";
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+  let bookingsHTML = '';
   currentHotel.roomsAvailByDateAndType.forEach((room) => {
     bookingsHTML += `<div class="to-book-thumbnail">
                 <div class="to-book-info room${room.number}" id=${room.number}>
@@ -178,6 +184,11 @@ const displayPossibleBookings = () => {
   });
 
   possibleBookings.innerHTML = bookingsHTML;
+
+  if (currentHotel.roomsAvailByDateAndType.length === 0) {
+    emptySearchMessage.innerText = 'we apologize - there are no rooms that match your current search';
+    followUp.innerText = 'please change your seach parameters and try again!';
+  };
 };
 
 // const displayBookButton = (id) => {
@@ -208,7 +219,7 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-  console.log(currentUser);
+  // console.log(currentUser);
   let currentButton = document.getElementById(`${id}`)
   hideElement([currentButton]);
 
