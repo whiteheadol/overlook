@@ -48,6 +48,17 @@ bookPageButton.addEventListener('click', function() {
   toggleBookPage();
 });
 
+homePageButton.addEventListener('click', function() {
+  populateUserBookings(bookingsData);
+  updateRoomInfo(roomsData);
+  // findUserTotalCost(roomsData);
+  updateUserSum();
+  updateUserName();
+  displayBookedThumbnails();
+  hideElement([bookPage, homePageButton, searchFields]);
+  showElement([homePage, bookPageButton, greeting, userMoney]);
+});
+
 filterButton.addEventListener('click', function() {
   findRoomsAvail();
   displayPossibleBookings();
