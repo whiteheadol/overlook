@@ -34,6 +34,7 @@ class Hotel {
   };
 
   checkForRoomsByDateAndType(typeInput, dateInput) {
+    this.roomsAvailByDateAndType = [];
     let availDateAndType = [];
 
     this.checkForRoomsByDate(dateInput);
@@ -58,8 +59,10 @@ class Hotel {
     } else {
       console.log('error');
       // Come back and account for more error handling here
-    };
 
+      // If this.roomsAvailByDateAndType === [];
+      // refresh the page to not show the last search, and show error message
+    };
   };
 
 };
