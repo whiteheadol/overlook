@@ -201,14 +201,27 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
+  console.log(currentUser);
   let currentButton = document.getElementById(`${id}`)
   hideElement([currentButton]);
+
+  // Would then invoke the post function here
+  // Update the current user by adding this instance of booking to their bookedRoomsInfo array
+    // push a new instance with number, bedsize, bidet, bookingID, constPerNight, date, numBeds, type
+    // Could look like making an object, making a new instance of room with this object, then adding the correct data and an ID
+
+    // Rerun the methods to update rooms available by date and type?
+  // Set time out to refresh booking page?
 };
 
+// What info to pass into post?
+  // { "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
+  // userID = currentUser.id
+  // date = dateInput.value (maybe have to make changes to formatting)
+  // roomNumber - can pull the id from the button (can use the helper function again!)
 
-// Pseudocode goals for Thursday:
+
+
+
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
-
-// On the bookings page:
-// Tie an event listener to the 'book' button that will make a new instance of the room object and initiate a post to the bookings data!
