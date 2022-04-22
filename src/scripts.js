@@ -59,6 +59,8 @@ possibleBookings.addEventListener('click', function(e) {
   // };
   if (e.target.classList.contains('book-button')) {
     console.log(currentHotel);
+    postToBookings(e.target.id);
+    updateBookingText(e.target.id);
   }
 });
 
@@ -160,7 +162,7 @@ const displayPossibleBookings = () => {
                 <p>bidet: ${room.bidet}</p>
                 <p>cost per night: $${room.costPerNight}</p>
                 </div>
-                <button class="book-button button${room.number}">book now</button>
+                <button class="book-button" id="btn${room.number}">book now</button>
                 </div>`;
   });
 
@@ -178,6 +180,31 @@ const displayPossibleBookings = () => {
 
 // function to make post request and confirm booking
 
+const findIdHelper = (id) => {
+  let newId = id.split('');
+  let idToPass = newId.reduce((acc, letter) => {
+    if (letter !== 'b' && letter !== 't' && letter !== 'n') {
+      acc.push(letter);
+    }
+    return acc;
+  }, []);
+  let finalId = idToPass.join('');
+  return finalId;
+};
+
+const postToBookings = (id) => {
+
+};
+
+const updateBookingText = (id) => {
+  let newId = findIdHelper(id);
+  let textToChange = document.getElementById(`${newId}`);
+  textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
+
+  let currentButton = document.getElementById(`${id}`)
+  hideElement([currentButton]);
+};
+
 
 // Pseudocode goals for Thursday:
 
@@ -185,6 +212,3 @@ const displayPossibleBookings = () => {
 
 // On the bookings page:
 // Tie an event listener to the 'book' button that will make a new instance of the room object and initiate a post to the bookings data!
-// Add an event listener to the element with .book-button-display class to toggle back to the room details. Should be able to toggle between the room details and the button that allows you to book
-
-// Revisit hover functionality to see if I want to hard code my book button into the page instead of have it appear. I see benefits to both, want to evaluate the UI
