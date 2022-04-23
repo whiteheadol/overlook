@@ -42,10 +42,6 @@ describe('Hotel', () => {
 
   it('should be able to check what rooms are available on a certain date and store available rooms in a property', () => {
 
-<<<<<<< HEAD
-    //Sad: test different date with no availbility
-=======
->>>>>>> 9e2cb090d4e94d515fd259acaff70e3f05498216
     hotel.checkForRoomsByDate('2022/01/09');
 
     expect(hotel.roomsAvailByDate.length).to.equal(2);
@@ -56,7 +52,7 @@ describe('Hotel', () => {
   it('should be able to check what rooms are available on a certain date and any type', () => {
 
     hotel.checkForRoomsByDate('2022/01/09');
-    hotel.checkForRoomsByDateAndType('any', '2022/01/09')
+    hotel.checkForRoomsByDateAndType('any', '2022/01/09');
 
     expect(hotel.roomsAvailByDateAndType.length).to.equal(2);
     expect(hotel.roomsAvailByDateAndType[0]).to.equal(rooms[0]);
@@ -66,7 +62,7 @@ describe('Hotel', () => {
   it('should be able to check what rooms are available on a certain date and of a certain type', () => {
 
     hotel.checkForRoomsByDate('2022/01/09');
-    hotel.checkForRoomsByDateAndType('single', '2022/01/09')
+    hotel.checkForRoomsByDateAndType('single', '2022/01/09');
 
     expect(hotel.roomsAvailByDateAndType.length).to.equal(1);
     expect(hotel.roomsAvailByDateAndType[0]).to.equal(rooms[0]);
@@ -75,7 +71,17 @@ describe('Hotel', () => {
   it('should not add rooms if they do not meet both criteria', () => {
 
     hotel.checkForRoomsByDate('2022/01/09');
-    hotel.checkForRoomsByDateAndType('potato', '2022/01/09')
+    hotel.checkForRoomsByDateAndType('potato', '2022/01/09');
+
+    expect(hotel.roomsAvailByDateAndType.length).to.equal(0);
+    expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);
+  });
+
+  it('should be able to manually remove a room from the array of rooms available', () => {
+
+    hotel.checkForRoomsByDate('2022/01/09');
+    hotel.checkForRoomsByDateAndType('single', '2022/01/09');
+    hotel.filterOutRoom(12);
 
     expect(hotel.roomsAvailByDateAndType.length).to.equal(0);
     expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);

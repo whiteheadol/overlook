@@ -50,17 +50,12 @@ class Hotel {
         }
       });
     } else if (typeInput === 'junior' || typeInput === 'residential' || typeInput === 'single') {
-      console.log('j', typeInput);
       this.roomsAvailByDate.forEach(room => {
         if (room.roomType.includes(typeInput)) {
           availDateAndType.push(room);
           this.roomsAvailByDateAndType = availDateAndType;
         };
       });
-      // Come back and account for more error handling here
-
-      // If this.roomsAvailByDateAndType === [];
-      // refresh the page to not show the last search, and show error message
     };
   };
 
