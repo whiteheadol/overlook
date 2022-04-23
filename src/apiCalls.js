@@ -40,4 +40,6 @@ let postBooking = (bookingObj) => {
 
 
 
-export {usersPromise, bookingsPromise, roomsPromise, postBooking};
+
+
+export {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise};
