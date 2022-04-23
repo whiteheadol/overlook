@@ -124,7 +124,6 @@ const findUserTotalCost = (rooms) => {
 };
 
 const updateUserSum = () => {
-
   userSum.innerText = `$${currentUser.totalSpent}`;
 };
 
@@ -166,19 +165,22 @@ const findRoomsAvail = () => {
   date = date.join('/');
   let type = document.querySelector('#select1');
   type = type.value;
-  Promise.all([bookingsPromise])
-  .then(jsonArray => {
-    console.log('json', jsonArray[0].bookings);
-    bookingsData = jsonArray[0].bookings;
-    currentHotel = new Hotel(bookingsData, roomsData);
-  })
-  .then(result => {
-    currentHotel.checkForRoomsByDateAndType(type, date);
-    currentHotel.filterOutRoom(roomNumber);
-    displayPossibleBookings();
-    console.log('date', date);
-    console.log(currentHotel);
-  });
+  currentHotel.checkForRoomsByDateAndType(type, date);
+  currentHotel.filterOutRoom(roomNumber);
+  displayPossibleBookings();
+  // Promise.all([bookingsPromise])
+  // .then(jsonArray => {
+  //   console.log('json', jsonArray[0].bookings);
+  //   bookingsData = jsonArray[0].bookings;
+  //   currentHotel = new Hotel(bookingsData, roomsData);
+  // })
+  // .then(result => {
+  //   currentHotel.checkForRoomsByDateAndType(type, date);
+  //   currentHotel.filterOutRoom(roomNumber);
+  //   displayPossibleBookings();
+  //   console.log('date', date);
+  //   console.log(currentHotel);
+  // });
 };
 
 const displayPossibleBookings = () => {
