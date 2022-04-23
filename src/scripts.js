@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -50,13 +50,9 @@ window.onload = () =>{
 
 bookPageButton.addEventListener('click', function() {
   findRoomsAvail();
-  // currentHotel.checkForRoomsByDateAndType();
-  // displayPossibleBookings();
   toggleBookPage();
   emptySearchMessage.innerText = '';
   followUp.innerText = '';
-  // console.log(currentUser);
-  console.log('book', bookingsData);
 });
 
 homePageButton.addEventListener('click', function() {
@@ -111,7 +107,6 @@ const loadWindow = () => {
     updateUserSum();
     updateUserName();
     displayBookedThumbnails();
-    console.log(currentUser)
   });
 };
 
@@ -168,19 +163,6 @@ const findRoomsAvail = () => {
   currentHotel.checkForRoomsByDateAndType(type, date);
   currentHotel.filterOutRoom(roomNumber);
   displayPossibleBookings();
-  // Promise.all([bookingsPromise])
-  // .then(jsonArray => {
-  //   console.log('json', jsonArray[0].bookings);
-  //   bookingsData = jsonArray[0].bookings;
-  //   currentHotel = new Hotel(bookingsData, roomsData);
-  // })
-  // .then(result => {
-  //   currentHotel.checkForRoomsByDateAndType(type, date);
-  //   currentHotel.filterOutRoom(roomNumber);
-  //   displayPossibleBookings();
-  //   console.log('date', date);
-  //   console.log(currentHotel);
-  // });
 };
 
 const displayPossibleBookings = () => {
@@ -249,11 +231,7 @@ const postToBookings = (id) => {
   postBooking(obj);
   currentUser.addSingleBooking(obj);
   currentHotel.filterOutRoom(roomNumber);
-  // find a way to update or refetch bookings info
 };
-
-// when toggling back to book page, update appropriately
-
 
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
