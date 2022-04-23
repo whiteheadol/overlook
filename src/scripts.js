@@ -53,14 +53,12 @@ bookPageButton.addEventListener('click', function() {
 });
 
 homePageButton.addEventListener('click', function() {
-  populateUserBookings(bookingsData);
-  updateRoomInfo(roomsData);
-  // findUserTotalCost(roomsData);
   updateUserSum();
   updateUserName();
   displayBookedThumbnails();
   hideElement([bookPage, homePageButton, searchFields]);
   showElement([homePage, bookPageButton, greeting, userMoney]);
+  console.log(currentUser);
 });
 
 filterButton.addEventListener('click', function() {
@@ -69,14 +67,12 @@ filterButton.addEventListener('click', function() {
 });
 
 possibleBookings.addEventListener('click', function(e) {
-  // if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
-  //   displayBookButton(e.target.id);
-  // };
   if (e.target.classList.contains('book-button')) {
     // console.log(currentHotel);
     updateBookingText(e.target.id);
     postToBookings(e.target.id);
-  }
+  };
+  console.log(currentUser);
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -110,6 +106,7 @@ const loadWindow = () => {
     updateUserSum();
     updateUserName();
     displayBookedThumbnails();
+    console.log(currentUser)
   });
 };
 
@@ -137,6 +134,9 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
+  console.log(bookingsData);
+  // currentUser.addBookingsIds(bookingsData);
+  currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -191,17 +191,6 @@ const displayPossibleBookings = () => {
   };
 };
 
-// const displayBookButton = (id) => {
-//   // let element = `.${id}`
-//   let textToHide = document.querySelector(`.room${id}`);
-//   let buttonToShow = document.querySelector(`.button${id}`)
-//   console.log(buttonToShow.innerHTML);
-//   hideElement([textToHide]);
-//   showElement([buttonToShow]);
-// };
-
-// function to make post request and confirm booking
-
 const findIdHelper = (id) => {
   let newId = id.split('');
   let idToPass = newId.reduce((acc, letter) => {
@@ -232,6 +221,7 @@ const updateBookingText = (id) => {
   // Set time out to refresh booking page?
 };
 
+// Add method to add a single booking to the user's book rooms
 const postToBookings = (id) => {
   let date = dateInput.value;
   date = date.split('-');
@@ -239,15 +229,9 @@ const postToBookings = (id) => {
   let roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
   let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
-  // console.log('obj:', obj);
   postBooking(obj);
+  currentUser.addSingleBooking(obj);
 };
-
-// What info to pass into post?
-  // { "userID": 48, "date": "2019/09/23", "roomNumber": 4 }
-  // userID = currentUser.id
-  // date = dateInput.value (maybe have to make changes to formatting)
-  // roomNumber - can pull the id from the button (can use the helper function again!)
 
 
 
