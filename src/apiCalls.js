@@ -1,3 +1,5 @@
+let errorMessage = document.querySelector('.error');
+
 let getPromise = (url) => {
   return fetch(url)
   .then(response => response.json())
@@ -26,12 +28,14 @@ let postBooking = (bookingObj) => {
     }
   })
   .then((booking) => {
+    errorMessage.innerText = '';
     console.log('worked:', booking)
     // will have to use this response to get the id and figure out what to do from there
     // just want to view it for now, before deciding how to procede
   })
   .catch((error) => {
     console.log('ERROR');
+    errorMessage.innerText = 'we are so sorry, your room was unable to be booked';
     // query select where my error message will appear,
     // change the error message inner text
     // return that selected element?
