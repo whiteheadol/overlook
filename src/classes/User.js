@@ -10,11 +10,19 @@ class User {
   }
 
   addBookingsIds(bookings) {
+    let ids = [];
+    this.bookingsIds = [];
+
     bookings.forEach(reservation => {
-      if (reservation.userID === this.id) {
+      if (reservation.userID === this.id && !ids.includes(reservation.id)) {
+        ids.push(reservation.id);
         this.bookingsIds.push(reservation);
       };
     });
+  };
+
+  addSingleBooking(obj) {
+    this.bookingsIds.push(obj);
   };
 
   // Test this
@@ -37,6 +45,10 @@ class User {
     });
     this.bookedRoomsInfo = bookedRooms;
   };
+
+  // addSingleBookedRoom(roomsData) {
+  //
+  // };
 
   calculateTotalSpent(rooms) {
     rooms.forEach(room => {
