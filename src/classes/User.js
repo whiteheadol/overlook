@@ -48,6 +48,7 @@ class User {
   };
 
   calculateTotalSpent(rooms) {
+    this.totalSpent = 0;
     rooms.forEach(room => {
       this.bookingsIds.forEach(booking => {
         if (booking.roomNumber === room.number) {
