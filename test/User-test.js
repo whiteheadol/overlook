@@ -96,4 +96,13 @@ describe('User', () => {
     expect(user2.totalSpent).to.equal(871.08);
   });
 
+  it('should be able to add a single booking to the user\'s booked rooms', () => {
+
+    user1.addSingleBooking({ "userID": 1, "date": '2022/03/15', "roomNumber": 12 });
+
+    expect(user1.bookingsIds.length).to.equal(1);
+    expect(user1.bookingsIds[0].roomNumber).to.equal(12);
+
+  });
+
 });

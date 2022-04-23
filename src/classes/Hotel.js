@@ -28,9 +28,7 @@ class Hotel {
         availOnDate.push(room);
       };
     });
-    // console.log('avail', availOnDate);
     this.roomsAvailByDate = availOnDate;
-    // this.roomsAvailByDateAndType = availOnDate;
   };
 
   checkForRoomsByDateAndType(typeInput, dateInput) {
@@ -38,7 +36,6 @@ class Hotel {
     let availDateAndType = [];
 
     this.checkForRoomsByDate(dateInput);
-    // console.log('avail on date', this.roomsAvailByDate)
 
     if (typeInput === 'any') {
       this.roomsAvailByDateAndType = this.roomsAvailByDate;
@@ -50,23 +47,15 @@ class Hotel {
         }
       });
     } else if (typeInput === 'junior' || typeInput === 'residential' || typeInput === 'single') {
-      console.log('j', typeInput);
       this.roomsAvailByDate.forEach(room => {
         if (room.roomType.includes(typeInput)) {
           availDateAndType.push(room);
           this.roomsAvailByDateAndType = availDateAndType;
         };
       });
-      // Come back and account for more error handling here
-
-      // If this.roomsAvailByDateAndType === [];
-      // refresh the page to not show the last search, and show error message
     };
   };
 
-// TEST THIS METHOD
-// method to take in id number of room just booked
-// filter out that room id on roomsAvailByDateAndType
   filterOutRoom(roomNumber) {
     let newArr = this.roomsAvailByDateAndType.filter(room => {
       return room.number !== roomNumber;
