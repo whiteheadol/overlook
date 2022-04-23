@@ -21,6 +21,7 @@ class User {
     });
   };
 
+  // test this
   addSingleBooking(obj) {
     this.bookingsIds.push(obj);
   };
@@ -45,10 +46,6 @@ class User {
     });
     this.bookedRoomsInfo = bookedRooms;
   };
-
-  // addSingleBookedRoom(roomsData) {
-  //
-  // };
 
   calculateTotalSpent(rooms) {
     rooms.forEach(room => {
