@@ -67,7 +67,9 @@ h3 {
 }
 
 h4 {
-  margin-bottom: 15px;
+  /* margin-bottom: 15px; */
+  text-align: center;
+  font-size: 20px;
 }
 
 header {
@@ -155,8 +157,12 @@ label {
   background-size: cover;
 }
 
+.to-book-thumbnail {
+  height: 300px;
+}
+
 /* Check with eli for frosting info? */
-.booking-info, .to-book-info, .book-button-display {
+.booking-info, .to-book-info, .book-button-display, .book-button-display {
   display: flex;
   flex-direction: column;
   background-color: #FFFFFF;
@@ -169,12 +175,21 @@ label {
   justify-content: center;
 }
 
-.to-book-info:hover {
+.to-book-info {
+  margin-top: 15px;
+}
+
+/* .to-book-info:hover {
   transform: scale(1.04);
   transition: .6s;
   opacity: 1;
-}
+} */
 
+.booked {
+  font-size: 22px;
+  text-align: center;
+  margin-top: 15px;
+}
 
 .filter-button, .clear-button {
   padding: 5px;
@@ -184,8 +199,15 @@ label {
   width: 60px;
 }
 
-.clear-button {
+/* .clear-button {
   width: 120px;
+} */
+
+.book-button {
+  margin-top: 15px;
+  background-color: #FFFFFF;
+  color: #2F2A3A;
+  font-size: 20px;
 }
 
 .book-button:hover {

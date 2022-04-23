@@ -10,11 +10,20 @@ class User {
   }
 
   addBookingsIds(bookings) {
+    let ids = [];
+    this.bookingsIds = [];
+
     bookings.forEach(reservation => {
-      if (reservation.userID === this.id) {
+      if (reservation.userID === this.id && !ids.includes(reservation.id)) {
+        ids.push(reservation.id);
         this.bookingsIds.push(reservation);
       };
     });
+  };
+
+  // test this
+  addSingleBooking(obj) {
+    this.bookingsIds.push(obj);
   };
 
   // Test this
@@ -39,6 +48,7 @@ class User {
   };
 
   calculateTotalSpent(rooms) {
+    this.totalSpent = 0;
     rooms.forEach(room => {
       this.bookingsIds.forEach(booking => {
         if (booking.roomNumber === room.number) {

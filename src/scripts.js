@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -21,6 +21,7 @@ let bookingsData;
 let roomsData;
 let currentUser;
 let currentHotel;
+let roomNumber;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -32,11 +33,14 @@ let homePageButton = document.querySelector('.home-page-button');
 let homePage = document.querySelector('.homepage');
 let bookPage = document.querySelector('.book-page');
 let greeting = document.querySelector('.greeting');
+// do i need the selector below?
 let browseGreeting = document.querySelector('.browse');
 let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
+let emptySearchMessage = document.querySelector('.filter-subheading');
+let followUp = document.querySelector('.followup');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -45,7 +49,19 @@ window.onload = () =>{
 };
 
 bookPageButton.addEventListener('click', function() {
+  findRoomsAvail();
   toggleBookPage();
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+});
+
+homePageButton.addEventListener('click', function() {
+  findUserTotalCost(roomsData);
+  updateUserSum();
+  updateUserName();
+  displayBookedThumbnails();
+  hideElement([bookPage, homePageButton, searchFields]);
+  showElement([homePage, bookPageButton, greeting, userMoney]);
 });
 
 filterButton.addEventListener('click', function() {
@@ -54,8 +70,9 @@ filterButton.addEventListener('click', function() {
 });
 
 possibleBookings.addEventListener('click', function(e) {
-  if (e.target.classList.contains('to-book-info') || e.target.parentElement.classList.contains('to-book-info')) {
-    displayBookButton(e.target.id);
+  if (e.target.classList.contains('book-button')) {
+    updateBookingText(e.target.id);
+    postToBookings(e.target.id);
   };
 });
 
@@ -81,7 +98,7 @@ const loadWindow = () => {
     bookingsData = jsonArray[1].bookings;
     roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
-    currentHotel = new Hotel(bookingsData, roomsData)
+    currentHotel = new Hotel(bookingsData, roomsData);
   })
   .then(result => {
     populateUserBookings(bookingsData);
@@ -117,6 +134,7 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
+  currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -143,10 +161,14 @@ const findRoomsAvail = () => {
   let type = document.querySelector('#select1');
   type = type.value;
   currentHotel.checkForRoomsByDateAndType(type, date);
+  currentHotel.filterOutRoom(roomNumber);
+  displayPossibleBookings();
 };
 
 const displayPossibleBookings = () => {
-  let bookingsHTML = "";
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+  let bookingsHTML = '';
   currentHotel.roomsAvailByDateAndType.forEach((room) => {
     bookingsHTML += `<div class="to-book-thumbnail">
                 <div class="to-book-info room${room.number}" id=${room.number}>
@@ -157,31 +179,59 @@ const displayPossibleBookings = () => {
                 <p>bidet: ${room.bidet}</p>
                 <p>cost per night: $${room.costPerNight}</p>
                 </div>
-                <div class="book-button-display hidden button${room.number}">
-                  <button class="book-button">book now</button>
-                </div>
+                <button class="book-button" id="btn${room.number}">book now</button>
                 </div>`;
   });
 
   possibleBookings.innerHTML = bookingsHTML;
+
+  if (currentHotel.roomsAvailByDateAndType.length === 0) {
+    emptySearchMessage.innerText = 'we apologize - there are no rooms that match your current search';
+    followUp.innerText = 'please change your seach parameters and try again!';
+  };
 };
 
-const displayBookButton = (id) => {
-  // let element = `.${id}`
-  let textToHide = document.querySelector(`.room${id}`);
-  let buttonToShow = document.querySelector(`.button${id}`)
-  console.log(buttonToShow.innerHTML);
-  hideElement([textToHide]);
-  showElement([buttonToShow]);
+const findIdHelper = (id) => {
+  let newId = id.split('');
+  let idToPass = newId.reduce((acc, letter) => {
+    if (letter !== 'b' && letter !== 't' && letter !== 'n') {
+      acc.push(letter);
+    }
+    return acc;
+  }, []);
+  let finalId = idToPass.join('');
+  return finalId;
 };
 
+const updateBookingText = (id) => {
+  let newId = findIdHelper(id);
+  let textToChange = document.getElementById(`${newId}`);
+  textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-// Pseudocode goals for Thursday:
+  // console.log(currentUser);
+  let currentButton = document.getElementById(`${id}`)
+  hideElement([currentButton]);
+
+  // Would then invoke the post function here
+  // Update the current user by adding this instance of booking to their bookedRoomsInfo array
+    // push a new instance with number, bedsize, bidet, bookingID, constPerNight, date, numBeds, type
+    // Could look like making an object, making a new instance of room with this object, then adding the correct data and an ID
+
+    // Rerun the methods to update rooms available by date and type?
+  // Set time out to refresh booking page?
+};
+
+const postToBookings = (id) => {
+  let date = dateInput.value;
+  date = date.split('-');
+  date = date.join('/');
+  roomNumber = findIdHelper(id);
+  roomNumber = Number(roomNumber);
+  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
+  postBooking(obj);
+  currentUser.addSingleBooking(obj);
+  currentHotel.filterOutRoom(roomNumber);
+};
+
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
-
-// On the bookings page:
-// Tie an event listener to the 'book' button that will make a new instance of the room object and initiate a post to the bookings data!
-// Add an event listener to the element with .book-button-display class to toggle back to the room details. Should be able to toggle between the room details and the button that allows you to book
-
-// Revisit hover functionality to see if I want to hard code my book button into the page instead of have it appear. I see benefits to both, want to evaluate the UI

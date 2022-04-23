@@ -28,15 +28,17 @@ class Hotel {
         availOnDate.push(room);
       };
     });
-
+    // console.log('avail', availOnDate);
     this.roomsAvailByDate = availOnDate;
     // this.roomsAvailByDateAndType = availOnDate;
   };
 
   checkForRoomsByDateAndType(typeInput, dateInput) {
+    this.roomsAvailByDateAndType = [];
     let availDateAndType = [];
 
     this.checkForRoomsByDate(dateInput);
+    // console.log('avail on date', this.roomsAvailByDate)
 
     if (typeInput === 'any') {
       this.roomsAvailByDateAndType = this.roomsAvailByDate;
@@ -55,13 +57,22 @@ class Hotel {
           this.roomsAvailByDateAndType = availDateAndType;
         };
       });
-    } else {
-      console.log('error');
       // Come back and account for more error handling here
-    };
 
+      // If this.roomsAvailByDateAndType === [];
+      // refresh the page to not show the last search, and show error message
+    };
   };
 
+// TEST THIS METHOD
+// method to take in id number of room just booked
+// filter out that room id on roomsAvailByDateAndType
+  filterOutRoom(roomNumber) {
+    let newArr = this.roomsAvailByDateAndType.filter(room => {
+      return room.number !== roomNumber;
+    });
+    this.roomsAvailByDateAndType = newArr;
+  };
 };
 
 export default Hotel;
