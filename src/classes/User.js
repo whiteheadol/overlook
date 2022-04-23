@@ -26,7 +26,6 @@ class User {
     this.bookingsIds.push(obj);
   };
 
-  // Test this
   addBookedRoomInfo(rooms) {
     let allRooms = [];
     let bookedRooms = [];
