@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -21,6 +21,7 @@ let bookingsData;
 let roomsData;
 let currentUser;
 let currentHotel;
+let roomNumber;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -48,17 +49,23 @@ window.onload = () =>{
 };
 
 bookPageButton.addEventListener('click', function() {
+  findRoomsAvail();
+  // currentHotel.checkForRoomsByDateAndType();
+  // displayPossibleBookings();
   toggleBookPage();
-  console.log(currentUser);
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+  // console.log(currentUser);
+  console.log('book', bookingsData);
 });
 
 homePageButton.addEventListener('click', function() {
+  findUserTotalCost(roomsData);
   updateUserSum();
   updateUserName();
   displayBookedThumbnails();
   hideElement([bookPage, homePageButton, searchFields]);
   showElement([homePage, bookPageButton, greeting, userMoney]);
-  console.log(currentUser);
 });
 
 filterButton.addEventListener('click', function() {
@@ -68,11 +75,9 @@ filterButton.addEventListener('click', function() {
 
 possibleBookings.addEventListener('click', function(e) {
   if (e.target.classList.contains('book-button')) {
-    // console.log(currentHotel);
     updateBookingText(e.target.id);
     postToBookings(e.target.id);
   };
-  console.log(currentUser);
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -97,7 +102,7 @@ const loadWindow = () => {
     bookingsData = jsonArray[1].bookings;
     roomsData = jsonArray[2].rooms;
     currentUser = new User(usersData);
-    currentHotel = new Hotel(bookingsData, roomsData)
+    currentHotel = new Hotel(bookingsData, roomsData);
   })
   .then(result => {
     populateUserBookings(bookingsData);
@@ -119,6 +124,7 @@ const findUserTotalCost = (rooms) => {
 };
 
 const updateUserSum = () => {
+
   userSum.innerText = `$${currentUser.totalSpent}`;
 };
 
@@ -134,8 +140,6 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
-  console.log(bookingsData);
-  // currentUser.addBookingsIds(bookingsData);
   currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
@@ -162,7 +166,19 @@ const findRoomsAvail = () => {
   date = date.join('/');
   let type = document.querySelector('#select1');
   type = type.value;
-  currentHotel.checkForRoomsByDateAndType(type, date);
+  Promise.all([bookingsPromise])
+  .then(jsonArray => {
+    console.log('json', jsonArray[0].bookings);
+    bookingsData = jsonArray[0].bookings;
+    currentHotel = new Hotel(bookingsData, roomsData);
+  })
+  .then(result => {
+    currentHotel.checkForRoomsByDateAndType(type, date);
+    currentHotel.filterOutRoom(roomNumber);
+    displayPossibleBookings();
+    console.log('date', date);
+    console.log(currentHotel);
+  });
 };
 
 const displayPossibleBookings = () => {
@@ -221,19 +237,20 @@ const updateBookingText = (id) => {
   // Set time out to refresh booking page?
 };
 
-// Add method to add a single booking to the user's book rooms
 const postToBookings = (id) => {
   let date = dateInput.value;
   date = date.split('-');
   date = date.join('/');
-  let roomNumber = findIdHelper(id);
+  roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
   let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
   postBooking(obj);
   currentUser.addSingleBooking(obj);
+  currentHotel.filterOutRoom(roomNumber);
+  // find a way to update or refetch bookings info
 };
 
-
+// when toggling back to book page, update appropriately
 
 
 
