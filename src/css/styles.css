@@ -1,18 +1,12 @@
-/* body {
-  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-} */
-
 /* font-family: 'Quicksand', sans-serif; */
 
 /* font-family: 'Nothing You Could Do', cursive; */
-
 
 /* Colors:
 - #A9C1D2 light steel blue
 - #FFFFFF plain white
 - #949D6A moss green
 - #2F2A3A raisin black */
-
 
 /* BODY  */
 * {
@@ -21,22 +15,19 @@
 }
 
 body {
+  align-items: center;
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw;
   justify-content: flex-start;
-  align-items: center;
-  /* background-image: url("../images/ocean2.jpg");
-  background-size: cover; */
-  /* opacity: 0.4; */
+  width: 100vw;
 }
 
 main {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .user-bookings, .possible-bookings {
@@ -48,15 +39,13 @@ main {
 }
 
 h2 {
-  margin: 40px 0px 40px 0px;
   font-size: 30px;
+  margin: 40px 0px 40px 0px;
   text-align: center;
 }
 
-
 /* HEADER  */
 h1 {
-  /* font-family: 'Nothing You Could Do', cursive; */
   color: #2F2A3A;
   font-size: 70px;
   margin: 100px 100px 15px 100px;
@@ -70,28 +59,28 @@ h3 {
 }
 
 h4 {
-  text-align: center;
   font-size: 20px;
+  text-align: center;
 }
 
 header {
+  align-items: flex-end;
   background-color: #A9C1D2;
   display: flex;
   height: 24%;
-  width: 100%;
-  margin: 0;
   justify-content: space-around;
-  align-items: flex-end;
+  margin: 0;
+  width: 100%;
 }
 
 button {
   background-color: #2F2A3A;
-  color: #FFFFFF;
-  border-radius: 5px;
   border: none;
+  border-radius: 5px;
+  color: #FFFFFF;
   height: 40px;
-  width: 120px;
   margin-bottom: 20px;
+  width: 120px;
 }
 
 .user-total-spent {
@@ -100,9 +89,9 @@ button {
 }
 
 .user-money {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 label {
@@ -110,9 +99,9 @@ label {
 }
 
 .search-fields {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   margin-bottom: -5px;
 }
 
@@ -122,26 +111,18 @@ label {
 }
 
 .calendar, .room-filter {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  align-items: center;
   justify-content: flex-start;
+  padding: 10px;
 }
-
-/* button:hover {
-  background-color: #3b3549;
-  border-radius: 7px;
-  transform: scale(1.02);
-  transition: .6s;
-} */
-
 
 /* MAIN  */
 .filter-subheading, .followup, .error {
   font-size: 30px;
-  text-align: center;
   margin-top: 20px;
+  text-align: center;
 }
 
 .followup {
@@ -149,17 +130,17 @@ label {
 }
 
 .booking-thumbnail, .to-book-thumbnail {
+  align-items: center;
+  background-color: #A9C1D2;
+  background-image: url("../images/ocean.jpg");
+  background-size: cover;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   height: 200px;
-  width: 300px;
-  background-color: #A9C1D2;
-  align-items: center;
   justify-content: center;
   margin: 20px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-  background-image: url("../images/ocean.jpg");
-  background-size: cover;
+  width: 300px;
 }
 
 .to-book-thumbnail {
@@ -168,16 +149,16 @@ label {
 
 /* Check with eli for frosting info? */
 .booking-info, .to-book-info, .book-button-display, .book-button-display {
+  align-items: center;
+  background-color: #FFFFFF;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  background-color: #FFFFFF;
-  opacity: 0.8;
-  padding: 10px;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-  align-items: center;
-  width: 68%;
   height: 60%;
   justify-content: center;
+  opacity: 0.8;
+  padding: 10px;
+  width: 68%;
 }
 
 .to-book-info {
@@ -186,61 +167,65 @@ label {
 
 .booked {
   font-size: 22px;
-  text-align: center;
   margin-top: 15px;
+  text-align: center;
 }
 
 .filter-button {
-  padding: 5px;
   height: 30px;
-  margin-top: 25px;
   margin-left: 20px;
+  margin-top: 25px;
+  padding: 5px;
   width: 60px;
 }
 
 .book-button {
-  margin-top: 15px;
   background-color: #FFFFFF;
   color: #2F2A3A;
   font-size: 20px;
+  margin-top: 15px;
 }
 
 .login-page {
-  height: 100vh;
-  width: 100vw;
-  /* margin-top: 20px; */
-  background-image: url("../images/ocean.jpg");
   background-size: cover;
-  /* opacity: 0.5; */
+  background-image: url("../images/ocean.jpg");
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
   display: flex;
+  height: 100vh;
   justify-content: center;
+  width: 100vw;
 }
 
 .login-form {
-  display: flex;
-  height: 400px;
-  width: 800px;
-  margin-top: 100px;
-  background-color: #dce3e6;
-  opacity: 1;
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
-  justify-content: center;
   align-items: center;
+  background-color: #dce3e6;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  justify-content: center;
+  margin-top: 100px;
+  opacity: 1;
+  width: 600px;
 }
 
 .form-styling {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  opacity: 1;
   height: 300px;
+  opacity: 1;
   width: 200px;
-  align-items: center;
 }
 
 .form-label {
-  margin-top: 15px;
   font-size: 20px;
+  margin-top: 15px;
+}
+
+.form-heading {
+  font-size: 40px;
+  margin-bottom: 25px;
 }
 
 .login {
@@ -248,14 +233,14 @@ label {
 }
 
 button:hover {
+  cursor: pointer;
   transform: scale(1.06);
   transition: .6s;
-  cursor: pointer;
 }
 
 .user-error {
-  text-align: center;
   color: red;
+  text-align: center;
 }
 
 .hidden {
