@@ -1,8 +1,4 @@
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
 import {bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
@@ -40,11 +36,6 @@ let loginPage = document.querySelector('.login-page');
 let header = document.querySelector('.header');
 
 // Event Listeners -------------------------------------------------------------
-// Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
-// window.onload = () =>{
-//   loadWindow();
-// };
-
 bookPageButton.addEventListener('click', function() {
   findRoomsAvail();
   toggleBookPage();
@@ -90,7 +81,6 @@ const hideElement = elements => {
 const loadInfo = () => {
   Promise.all(
     [
-      // usersPromise,
       getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`),
       bookingsPromise,
       roomsPromise
@@ -111,7 +101,6 @@ const loadInfo = () => {
     updateUserName();
     displayBookedThumbnails();
     hideLogin();
-    console.log(currentUser);
   });
 };
 
@@ -213,17 +202,8 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-  // console.log(currentUser);
   let currentButton = document.getElementById(`${id}`)
   hideElement([currentButton]);
-
-  // Would then invoke the post function here
-  // Update the current user by adding this instance of booking to their bookedRoomsInfo array
-    // push a new instance with number, bedsize, bidet, bookingID, constPerNight, date, numBeds, type
-    // Could look like making an object, making a new instance of room with this object, then adding the correct data and an ID
-
-    // Rerun the methods to update rooms available by date and type?
-  // Set time out to refresh booking page?
 };
 
 const postToBookings = (id) => {
@@ -260,23 +240,22 @@ const postToBookings = (id) => {
 const checkLogin = () => {
   let num = findCorrectUsername();
   checkCustomerPassword();
-  console.log('n', num)
-  console.log('f', checkCustomerPassword())
   if (num > 0 && num < 51 && checkCustomerPassword() === true) {
+    userError.innerText = '';
     loadInfo();
   } else {
-    console.log('error');
-    // error handling
+    userError.innerText = 'please enter a valid username and password';
   }
 };
 
 const findCorrectUsername = () => {
   if (username.value.includes('customer')) {
+    userError.innerText = '';
     return findCustomerNum();
   } else if (username.value.includes('manager')) {
-    console.log('man');
+    // allow for manager functionality here
   } else {
-    console.log('add error handling');
+    userError.innerText = 'please enter a valid username and password';
   }
 };
 
@@ -293,8 +272,6 @@ const findCustomerNum = () => {
 
   if (userNum > 0 && userNum < 51) {
     userError.innerText = '';
-    // userNum = true;
-    console.log('n', userNum)
     return userNum;
   } else {
     userError.innerText = 'please enter a valid username and password';
@@ -313,8 +290,7 @@ const checkCustomerPassword = () => {
 const hideLogin = () => {
   hideElement([loginPage]);
   showElement([header, homePage]);
-}
-
+};
 
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
