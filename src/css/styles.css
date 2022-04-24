@@ -21,13 +21,16 @@
 }
 
 body {
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
   justify-content: flex-start;
   align-items: center;
+  /* background-image: url("../images/ocean2.jpg");
+  background-size: cover; */
+  /* opacity: 0.4; */
 }
 
 main {
@@ -89,12 +92,6 @@ button {
   height: 40px;
   width: 120px;
   margin-bottom: 20px;
-}
-
-button:hover {
-  transform: scale(1.06);
-  transition: .6s;
-  cursor: pointer;
 }
 
 .user-total-spent {
@@ -206,6 +203,54 @@ label {
   background-color: #FFFFFF;
   color: #2F2A3A;
   font-size: 20px;
+}
+
+.login-page {
+  height: 100vh;
+  width: 100vw;
+  /* margin-top: 20px; */
+  background-image: url("../images/ocean.jpg");
+  background-size: cover;
+  /* opacity: 0.5; */
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+}
+
+.login-form {
+  display: flex;
+  height: 400px;
+  width: 800px;
+  margin-top: 100px;
+  background-color: #dce3e6;
+  opacity: 1;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.form-styling {
+  display: flex;
+  flex-direction: column;
+  opacity: 1;
+  height: 300px;
+  width: 200px;
+  align-items: center;
+}
+
+.form-label {
+  margin-top: 15px;
+  font-size: 20px;
+}
+
+.login {
+  margin-top: 25px;
+}
+
+button:hover {
+  transform: scale(1.06);
+  transition: .6s;
+  cursor: pointer;
 }
 
 .hidden {

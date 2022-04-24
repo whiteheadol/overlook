@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header>
+  <header class="hidden">
     <button class="book-page-button">book now</button>
     <button class="home-page-button hidden">homepage</button>
     <h1 class="greeting">welcome, <span class="user-name"></span></h1>
@@ -39,7 +39,18 @@
     </div>
   </header>
   <main>
-    <section class="homepage">
+    <section class="login-page">
+      <section class="login-form">
+        <div class="form-styling">
+          <label for="uname" class="form-label">username:</label>
+          <input type="text" placeholder="enter username" name="uname" required>
+          <label for="psw" class="form-label">password:</label>
+          <input type="text" placeholder="enter password" name="psw" required>
+          <button class="login">login</button>
+        </div>
+      </section>
+    </section>
+    <section class="homepage hidden">
       <h2>your bookings:</h2>
       <div class="user-bookings"></div>
     </section>
