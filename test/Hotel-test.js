@@ -77,14 +77,4 @@ describe('Hotel', () => {
     expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);
   });
 
-  it('should be able to manually remove a room from the array of rooms available', () => {
-
-    hotel.checkForRoomsByDate('2022/01/09');
-    hotel.checkForRoomsByDateAndType('single', '2022/01/09');
-    hotel.filterOutRoom(12);
-
-    expect(hotel.roomsAvailByDateAndType.length).to.equal(0);
-    expect(hotel.roomsAvailByDateAndType).to.deep.equal([]);
-  });
-
 });
