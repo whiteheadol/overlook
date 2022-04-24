@@ -4,8 +4,6 @@ let getPromise = (url) => {
   .catch(err => console.log(error));
 }
 
-// This variable will change when a user logs in and gives their unique id
-// Will probably have to play with the importing/exporting if I have the event listener in scripts
 
 // let usersPromise = getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`);
 let bookingsPromise = getPromise(`http://localhost:3001/api/v1/bookings`);
@@ -18,11 +16,5 @@ let postBooking = (bookingObj) => {
     body: JSON.stringify(bookingObj)
   })
 };
-
-
-
-
-
-
 
 export {bookingsPromise, roomsPromise, postBooking, getPromise};
