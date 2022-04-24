@@ -253,6 +253,11 @@ button:hover {
   cursor: pointer;
 }
 
+.user-error {
+  text-align: center;
+  color: red;
+}
+
 .hidden {
   display: none;
 }

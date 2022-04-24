@@ -6,9 +6,8 @@ let getPromise = (url) => {
 
 // This variable will change when a user logs in and gives their unique id
 // Will probably have to play with the importing/exporting if I have the event listener in scripts
-let user = 1;
 
-let usersPromise = getPromise(`http://localhost:3001/api/v1/customers/${user}`);
+// let usersPromise = getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`);
 let bookingsPromise = getPromise(`http://localhost:3001/api/v1/bookings`);
 let roomsPromise = getPromise(`http://localhost:3001/api/v1/rooms`);
 
@@ -26,4 +25,4 @@ let postBooking = (bookingObj) => {
 
 
 
-export {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise};
+export {bookingsPromise, roomsPromise, postBooking, getPromise};

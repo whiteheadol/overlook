@@ -3,7 +3,7 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
 
-import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
+import {bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -14,6 +14,7 @@ let roomsData;
 let currentUser;
 let currentHotel;
 let roomNumber;
+// let userNum = 1;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -32,12 +33,16 @@ let possibleBookings = document.querySelector('.possible-bookings');
 let emptySearchMessage = document.querySelector('.filter-subheading');
 let followUp = document.querySelector('.followup');
 let errorMessage = document.querySelector('.error');
+let loginButton = document.querySelector('.login');
+let username = document.querySelector('.username');
+let password = document.querySelector('.password');
+let userError = document.querySelector('.user-error');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
-window.onload = () =>{
-  loadWindow();
-};
+// window.onload = () =>{
+//   loadWindow();
+// };
 
 bookPageButton.addEventListener('click', function() {
   findRoomsAvail();
@@ -68,6 +73,11 @@ possibleBookings.addEventListener('click', function(e) {
   };
 });
 
+loginButton.addEventListener('click', function() {
+  checkLogin();
+  loadWindow();
+});
+
 // Event Handlers and Functions ------------------------------------------------
 const showElement = elements => {
   elements.forEach(element => element.classList.remove("hidden"));
@@ -80,7 +90,8 @@ const hideElement = elements => {
 const loadWindow = () => {
   Promise.all(
     [
-      usersPromise,
+      // usersPromise,
+      getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`),
       bookingsPromise,
       roomsPromise
     ]
@@ -93,12 +104,13 @@ const loadWindow = () => {
     currentHotel = new Hotel(bookingsData, roomsData);
   })
   .then(result => {
-    populateUserBookings(bookingsData);
-    updateRoomInfo(roomsData);
-    findUserTotalCost(roomsData);
-    updateUserSum();
-    updateUserName();
-    displayBookedThumbnails();
+    // populateUserBookings(bookingsData);
+    // updateRoomInfo(roomsData);
+    // findUserTotalCost(roomsData);
+    // updateUserSum();
+    // updateUserName();
+    // displayBookedThumbnails();
+    console.log(currentUser);
   });
 };
 
@@ -243,6 +255,54 @@ const postToBookings = (id) => {
     })
   });
 };
+
+const checkLogin = () => {
+  console.log('clicked');
+  findCorrectUsername();
+  // Function to see what value of username is,
+  // if customer 1-50, reassign customer value and export that variable
+  // if manager, do nothing for now
+  // if invalid, show error message
+  // Function to see if password is correct
+};
+
+const findCorrectUsername = () => {
+  console.log(username.value);
+
+  if (username.value.includes('customer')) {
+    console.log('yep!');
+    // function to find which customer
+    findCustomerNum();
+    // console.log(currentUser);
+  } else if (username.value.includes('manager')) {
+    console.log('man');
+  } else {
+    console.log('add error handling');
+  }
+};
+
+const findCustomerNum = () => {
+  let userNum = username.value;
+  userNum = userNum.split('');
+  userNum.splice(0, 8);
+
+  if (userNum[0] === '0') {
+    userNum.splice(0, 1)
+  }
+
+  userNum = userNum.join('');
+
+  if (userNum > 0 && userNum < 51) {
+    userError.innerText = '';
+    return userNum;
+  } else {
+    userError.innerText = 'please enter a valid username and password';
+  }
+};
+
+// If userName and password are valid - then fetch
+
+
 
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
