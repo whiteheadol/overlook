@@ -21,11 +21,6 @@ class User {
     });
   };
 
-  // test this
-  addSingleBooking(obj) {
-    this.bookingsIds.push(obj);
-  };
-
   addBookedRoomInfo(rooms) {
     let allRooms = [];
     let bookedRooms = [];
