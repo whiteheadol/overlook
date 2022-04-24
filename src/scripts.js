@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -65,11 +65,13 @@ homePageButton.addEventListener('click', function() {
 });
 
 filterButton.addEventListener('click', function() {
+  event.preventDefault();
   findRoomsAvail();
   displayPossibleBookings();
 });
 
 possibleBookings.addEventListener('click', function(e) {
+  event.preventDefault();
   if (e.target.classList.contains('book-button')) {
     updateBookingText(e.target.id);
     postToBookings(e.target.id);
@@ -227,11 +229,56 @@ const postToBookings = (id) => {
   date = date.join('/');
   roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
-  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
-  postBooking(obj);
-  currentUser.addSingleBooking(obj);
-  currentHotel.filterOutRoom(roomNumber);
+  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber };
+  // console.log(obj);
+  postBooking(obj).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  })
+  .then((booking) => {
+    // errorMessage.innerText = '';
+    getPromise(`http://localhost:3001/api/v1/bookings`)
+    .then(jsonArray => {
+      bookingsData = jsonArray.bookings;
+      currentHotel = new Hotel(bookingsData, roomsData);
+    })
+  })
+  // .then((response) => {
+  //   if (response.ok) {
+  //     return response.json();
+  //   } else {
+  //     throw Error(response.statusText);
+  //   }
+  // })
+  // currentUser.addSingleBooking(obj);
+  // currentHotel.filterOutRoom(roomNumber);
 };
+
+// Promise.all(
+//   [
+//     usersPromise,
+//     bookingsPromise,
+//     roomsPromise
+//   ]
+// )
+// .then(jsonArray => {
+//   usersData = jsonArray[0];
+//   bookingsData = jsonArray[1].bookings;
+//   roomsData = jsonArray[2].rooms;
+//   currentUser = new User(usersData);
+//   currentHotel = new Hotel(bookingsData, roomsData);
+// })
+// .then(result => {
+//   populateUserBookings(bookingsData);
+//   updateRoomInfo(roomsData);
+//   findUserTotalCost(roomsData);
+//   updateUserSum();
+//   updateUserName();
+//   displayBookedThumbnails();
+// });
 
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
