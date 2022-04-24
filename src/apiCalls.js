@@ -1,5 +1,3 @@
-let errorMessage = document.querySelector('.error');
-
 let getPromise = (url) => {
   return fetch(url)
   .then(response => response.json())

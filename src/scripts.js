@@ -41,6 +41,7 @@ let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
 let emptySearchMessage = document.querySelector('.filter-subheading');
 let followUp = document.querySelector('.followup');
+let errorMessage = document.querySelector('.error');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -56,7 +57,6 @@ bookPageButton.addEventListener('click', function() {
 });
 
 homePageButton.addEventListener('click', function() {
-  findUserTotalCost(roomsData);
   updateUserSum();
   updateUserName();
   displayBookedThumbnails();
@@ -114,6 +114,7 @@ const loadWindow = () => {
 
 const populateUserBookings = (bookings) => {
   currentUser.addBookingsIds(bookingsData);
+  currentUser.addBookedRoomInfo(roomsData);
 };
 
 const findUserTotalCost = (rooms) => {
@@ -136,7 +137,7 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
-  currentUser.addBookedRoomInfo(roomsData);
+  // currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -163,7 +164,6 @@ const findRoomsAvail = () => {
   let type = document.querySelector('#select1');
   type = type.value;
   currentHotel.checkForRoomsByDateAndType(type, date);
-  currentHotel.filterOutRoom(roomNumber);
   displayPossibleBookings();
 };
 
@@ -230,7 +230,6 @@ const postToBookings = (id) => {
   roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
   let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber };
-  // console.log(obj);
   postBooking(obj).then((response) => {
     if (response.ok) {
       return response.json();
@@ -239,46 +238,20 @@ const postToBookings = (id) => {
     }
   })
   .then((booking) => {
-    // errorMessage.innerText = '';
+    errorMessage.innerText = '';
     getPromise(`http://localhost:3001/api/v1/bookings`)
     .then(jsonArray => {
       bookingsData = jsonArray.bookings;
       currentHotel = new Hotel(bookingsData, roomsData);
+      populateUserBookings(bookingsData);
+      updateRoomInfo(roomsData);
+      findUserTotalCost(roomsData);
     })
-  })
-  // .then((response) => {
-  //   if (response.ok) {
-  //     return response.json();
-  //   } else {
-  //     throw Error(response.statusText);
-  //   }
-  // })
-  // currentUser.addSingleBooking(obj);
-  // currentHotel.filterOutRoom(roomNumber);
+    .catch(error => {
+      errorMessage.innerText = 'we\'re sorry - there was a problem booking your room';
+    })
+  });
 };
-
-// Promise.all(
-//   [
-//     usersPromise,
-//     bookingsPromise,
-//     roomsPromise
-//   ]
-// )
-// .then(jsonArray => {
-//   usersData = jsonArray[0];
-//   bookingsData = jsonArray[1].bookings;
-//   roomsData = jsonArray[2].rooms;
-//   currentUser = new User(usersData);
-//   currentHotel = new Hotel(bookingsData, roomsData);
-// })
-// .then(result => {
-//   populateUserBookings(bookingsData);
-//   updateRoomInfo(roomsData);
-//   findUserTotalCost(roomsData);
-//   updateUserSum();
-//   updateUserName();
-//   displayBookedThumbnails();
-// });
 
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed

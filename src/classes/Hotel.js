@@ -56,12 +56,12 @@ class Hotel {
     };
   };
 
-  filterOutRoom(roomNumber) {
-    let newArr = this.roomsAvailByDateAndType.filter(room => {
-      return room.number !== roomNumber;
-    });
-    this.roomsAvailByDateAndType = newArr;
-  };
+  // filterOutRoom(roomNumber) {
+  //   let newArr = this.roomsAvailByDateAndType.filter(room => {
+  //     return room.number !== roomNumber;
+  //   });
+  //   this.roomsAvailByDateAndType = newArr;
+  // };
 };
 
 export default Hotel;
