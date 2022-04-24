@@ -1,19 +1,11 @@
-// This is the JavaScript entry file - your code begins here
-// Do not delete or rename this file ********
-
-// An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
 
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 // import './images/turing-logo.png'
 
-
-// console.log('This is the JavaScript entry file - your code begins here.');
-
 import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
-
 
 // Variables -------------------------------------------------------------------
 let usersData;
@@ -33,8 +25,6 @@ let homePageButton = document.querySelector('.home-page-button');
 let homePage = document.querySelector('.homepage');
 let bookPage = document.querySelector('.book-page');
 let greeting = document.querySelector('.greeting');
-// do i need the selector below?
-let browseGreeting = document.querySelector('.browse');
 let searchFields = document.querySelector('.search-fields');
 let dateInput = document.querySelector('input[type="date"]');
 let filterButton = document.querySelector('.filter-button');
