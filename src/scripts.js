@@ -14,7 +14,6 @@ let roomsData;
 let currentUser;
 let currentHotel;
 let roomNumber;
-// let userNum = false;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -37,6 +36,8 @@ let loginButton = document.querySelector('.login');
 let username = document.querySelector('.username');
 let password = document.querySelector('.password');
 let userError = document.querySelector('.user-error');
+let loginPage = document.querySelector('.login-page');
+let header = document.querySelector('.header');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -109,6 +110,7 @@ const loadInfo = () => {
     updateUserSum();
     updateUserName();
     displayBookedThumbnails();
+    hideLogin();
     console.log(currentUser);
   });
 };
@@ -307,6 +309,11 @@ const checkCustomerPassword = () => {
     return false;
   }
 };
+
+const hideLogin = () => {
+  hideElement([loginPage]);
+  showElement([header, homePage]);
+}
 
 
 
