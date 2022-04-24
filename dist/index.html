@@ -19,26 +19,22 @@
     </div>
     <div class="search-fields hidden">
       <h3>- search for your perfect room -</h3>
-      <!-- <h4>choose one of the following filters:</h4> -->
       <div class="inputs">
         <div class="calendar">
           <label for="date-filter">choose a date:</label>
           <input type="date" id="date-filter" name="night" value="2022-05-15" min="2022-05-01" max="2022-06-18" onkeydown="return false" required>
-          <!-- <button class="date-button">select</button> -->
         </div>
         <div class="room-filter">
-          <label for="room-type-dropdown">choose a roome type:</label>
-          <select id="select1" class="room-type-selection">
+          <label for="room-type-slection">choose a roome type:</label>
+          <select id="select1" name="room-type-selection" class="room-type-selection">
             <option value="any">any</option>
             <option value="junior">junior suite</option>
             <option value="residential">residential</option>
             <option value="single">single room</option>
             <option value="suite">suite</option>
           </select>
-          <!-- <button class="room-button">select</button> -->
         </div>
         <button class="filter-button">select</button>
-        <!-- <button class="clear-button hidden">clear filters</button> -->
       </div>
     </div>
   </header>
@@ -54,7 +50,6 @@
       <div class="possible-bookings"></div>
     </section>
   </main>
-  <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
   <script src="bundle.js"></script>
 </body>
 </html>

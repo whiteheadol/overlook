@@ -230,6 +230,7 @@ const postToBookings = (id) => {
   roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
   let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber };
+
   postBooking(obj).then((response) => {
     if (response.ok) {
       return response.json();
