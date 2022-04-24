@@ -10,7 +10,7 @@ import './css/styles.css';
 
 // console.log('This is the JavaScript entry file - your code begins here.');
 
-import {usersPromise, bookingsPromise, roomsPromise, postBooking} from "./apiCalls";
+import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -41,6 +41,7 @@ let filterButton = document.querySelector('.filter-button');
 let possibleBookings = document.querySelector('.possible-bookings');
 let emptySearchMessage = document.querySelector('.filter-subheading');
 let followUp = document.querySelector('.followup');
+let errorMessage = document.querySelector('.error');
 
 // Event Listeners -------------------------------------------------------------
 // Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
@@ -56,7 +57,6 @@ bookPageButton.addEventListener('click', function() {
 });
 
 homePageButton.addEventListener('click', function() {
-  findUserTotalCost(roomsData);
   updateUserSum();
   updateUserName();
   displayBookedThumbnails();
@@ -65,11 +65,13 @@ homePageButton.addEventListener('click', function() {
 });
 
 filterButton.addEventListener('click', function() {
+  event.preventDefault();
   findRoomsAvail();
   displayPossibleBookings();
 });
 
 possibleBookings.addEventListener('click', function(e) {
+  event.preventDefault();
   if (e.target.classList.contains('book-button')) {
     updateBookingText(e.target.id);
     postToBookings(e.target.id);
@@ -112,6 +114,7 @@ const loadWindow = () => {
 
 const populateUserBookings = (bookings) => {
   currentUser.addBookingsIds(bookingsData);
+  currentUser.addBookedRoomInfo(roomsData);
 };
 
 const findUserTotalCost = (rooms) => {
@@ -134,7 +137,7 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
-  currentUser.addBookedRoomInfo(roomsData);
+  // currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -161,7 +164,6 @@ const findRoomsAvail = () => {
   let type = document.querySelector('#select1');
   type = type.value;
   currentHotel.checkForRoomsByDateAndType(type, date);
-  currentHotel.filterOutRoom(roomNumber);
   displayPossibleBookings();
 };
 
@@ -227,10 +229,28 @@ const postToBookings = (id) => {
   date = date.join('/');
   roomNumber = findIdHelper(id);
   roomNumber = Number(roomNumber);
-  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber }
-  postBooking(obj);
-  currentUser.addSingleBooking(obj);
-  currentHotel.filterOutRoom(roomNumber);
+  let obj = { "userID": currentUser.id, "date": date, "roomNumber": roomNumber };
+  postBooking(obj).then((response) => {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw Error(response.statusText);
+    }
+  })
+  .then((booking) => {
+    errorMessage.innerText = '';
+    getPromise(`http://localhost:3001/api/v1/bookings`)
+    .then(jsonArray => {
+      bookingsData = jsonArray.bookings;
+      currentHotel = new Hotel(bookingsData, roomsData);
+      populateUserBookings(bookingsData);
+      updateRoomInfo(roomsData);
+      findUserTotalCost(roomsData);
+    })
+    .catch(error => {
+      errorMessage.innerText = 'we\'re sorry - there was a problem booking your room';
+    })
+  });
 };
 
 
