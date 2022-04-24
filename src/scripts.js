@@ -14,7 +14,7 @@ let roomsData;
 let currentUser;
 let currentHotel;
 let roomNumber;
-// let userNum = 1;
+// let userNum = false;
 
 // Query Selectors -------------------------------------------------------------
 let userSum = document.querySelector('.user-total-spent');
@@ -75,7 +75,6 @@ possibleBookings.addEventListener('click', function(e) {
 
 loginButton.addEventListener('click', function() {
   checkLogin();
-  loadWindow();
 });
 
 // Event Handlers and Functions ------------------------------------------------
@@ -87,7 +86,7 @@ const hideElement = elements => {
   elements.forEach(element => element.classList.add("hidden"));
 };
 
-const loadWindow = () => {
+const loadInfo = () => {
   Promise.all(
     [
       // usersPromise,
@@ -104,12 +103,12 @@ const loadWindow = () => {
     currentHotel = new Hotel(bookingsData, roomsData);
   })
   .then(result => {
-    // populateUserBookings(bookingsData);
-    // updateRoomInfo(roomsData);
-    // findUserTotalCost(roomsData);
-    // updateUserSum();
-    // updateUserName();
-    // displayBookedThumbnails();
+    populateUserBookings(bookingsData);
+    updateRoomInfo(roomsData);
+    findUserTotalCost(roomsData);
+    updateUserSum();
+    updateUserName();
+    displayBookedThumbnails();
     console.log(currentUser);
   });
 };
@@ -257,23 +256,21 @@ const postToBookings = (id) => {
 };
 
 const checkLogin = () => {
-  console.log('clicked');
-  findCorrectUsername();
-  // Function to see what value of username is,
-  // if customer 1-50, reassign customer value and export that variable
-  // if manager, do nothing for now
-  // if invalid, show error message
-  // Function to see if password is correct
+  let num = findCorrectUsername();
+  checkCustomerPassword();
+  console.log('n', num)
+  console.log('f', checkCustomerPassword())
+  if (num > 0 && num < 51 && checkCustomerPassword() === true) {
+    loadInfo();
+  } else {
+    console.log('error');
+    // error handling
+  }
 };
 
 const findCorrectUsername = () => {
-  console.log(username.value);
-
   if (username.value.includes('customer')) {
-    console.log('yep!');
-    // function to find which customer
-    findCustomerNum();
-    // console.log(currentUser);
+    return findCustomerNum();
   } else if (username.value.includes('manager')) {
     console.log('man');
   } else {
@@ -294,14 +291,22 @@ const findCustomerNum = () => {
 
   if (userNum > 0 && userNum < 51) {
     userError.innerText = '';
+    // userNum = true;
+    console.log('n', userNum)
     return userNum;
   } else {
     userError.innerText = 'please enter a valid username and password';
+    return false;
   }
 };
 
-// If userName and password are valid - then fetch
-
+const checkCustomerPassword = () => {
+  if (password.value === 'overlook2021') {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 
 
