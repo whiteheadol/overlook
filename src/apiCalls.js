@@ -8,8 +8,6 @@ let getPromise = (url) => {
   });
 };
 
-
-// let usersPromise = getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`);
 let bookingsPromise = getPromise(`http://localhost:3001/api/v1/bookings`);
 let roomsPromise = getPromise(`http://localhost:3001/api/v1/rooms`);
 

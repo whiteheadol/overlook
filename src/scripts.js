@@ -37,18 +37,11 @@ let header = document.querySelector('.header');
 
 // Event Listeners -------------------------------------------------------------
 bookPageButton.addEventListener('click', function() {
-  findRoomsAvail();
-  toggleBookPage();
-  emptySearchMessage.innerText = '';
-  followUp.innerText = '';
+  renderBookingsPage();
 });
 
 homePageButton.addEventListener('click', function() {
-  updateUserSum();
-  updateUserName();
-  displayBookedThumbnails();
-  hideElement([bookPage, homePageButton, searchFields]);
-  showElement([homePage, bookPageButton, greeting, userMoney]);
+  renderHomePage();
 });
 
 filterButton.addEventListener('click', function() {
@@ -102,6 +95,21 @@ const loadInfo = () => {
     displayBookedThumbnails();
     hideLogin();
   });
+};
+
+const renderBookingsPage = () => {
+  findRoomsAvail();
+  toggleBookPage();
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+};
+
+const renderHomePage = () => {
+  updateUserSum();
+  updateUserName();
+  displayBookedThumbnails();
+  hideElement([bookPage, homePageButton, searchFields]);
+  showElement([homePage, bookPageButton, greeting, userMoney]);
 };
 
 const populateUserBookings = (bookings) => {
@@ -233,7 +241,7 @@ const postToBookings = (id) => {
     })
     .catch(error => {
       errorMessage.innerText = 'we\'re sorry - there was a problem booking your room';
-    })
+    });
   });
 };
 
@@ -245,7 +253,7 @@ const checkLogin = () => {
     loadInfo();
   } else {
     userError.innerText = 'please enter a valid username and password';
-  }
+  };
 };
 
 const findCorrectUsername = () => {
