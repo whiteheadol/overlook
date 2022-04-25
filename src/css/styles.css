@@ -1,7 +1,3 @@
-/* font-family: 'Quicksand', sans-serif; */
-
-/* font-family: 'Nothing You Could Do', cursive; */
-
 /* Colors:
 - #A9C1D2 light steel blue
 - #FFFFFF plain white
@@ -81,6 +77,12 @@ button {
   height: 40px;
   margin-bottom: 20px;
   width: 120px;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.06);
+  transition: .6s;
 }
 
 .user-total-spent {
@@ -234,12 +236,6 @@ label {
 
 .login {
   margin-top: 25px;
-}
-
-button:hover {
-  cursor: pointer;
-  transform: scale(1.06);
-  transition: .6s;
 }
 
 .user-error {

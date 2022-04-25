@@ -53,7 +53,6 @@ class User {
     this.totalSpent = this.totalSpent.toFixed(2);
     this.totalSpent = Number(this.totalSpent);
   };
-
 };
 
 export default User;

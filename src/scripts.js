@@ -141,7 +141,6 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
-  // currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -214,7 +213,7 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-  let currentButton = document.getElementById(`${id}`)
+  let currentButton = document.getElementById(`${id}`);
   hideElement([currentButton]);
 };
 
@@ -303,6 +302,3 @@ const hideLogin = () => {
   hideElement([loginPage]);
   showElement([header, homePage]);
 };
-
-
-// On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
