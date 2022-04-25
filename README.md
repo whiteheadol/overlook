@@ -58,13 +58,16 @@ My biggest challenge, is related to one of my wins, as understanding the timing 
 ## Page Demo
 Logging in to view a user dashboard:
 
-![Favoriting a recipe](https://media.giphy.com/media/1NsLtAmPAbZIs9WU9E/giphy.gif)
+![Logging in](https://media.giphy.com/media/TH8grcR66c2emwCpAw/giphy.gif)
+
+Search for a room by type:
+
+![Filtering by room type](https://media.giphy.com/media/InoxdR3Ikf5NQzX2k3/giphy.gif)
 
 
 ## Possible Future Extensions
-- At the moment, a user is instantiated from an array of user objects, and the information for these user objects is pulled from a database. We would love to add functionality for a site visiter to actually provide their information and instantiate their own user object.
-- We would also love to add the ability for a user to rate the recipes they've cooked or to leave notes for themselves about the recipe.
-- Users are only able to filter by one tag at a time, but we hope to update this in the future so that they can filter by multiple tags at once.
+- I hope to build out **manager** functionality in the future, as laid out in the extension section of the spec.
+- I also hope to add a feature that will allow the user to sort their booked rooms by data, either ascending or descending.
 
 ## Set Up
 1. Fork and clone this repo.
