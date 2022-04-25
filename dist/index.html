@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="hidden">
+  <header class="header hidden">
     <button class="book-page-button">book now</button>
     <button class="home-page-button hidden">homepage</button>
     <h1 class="greeting">welcome, <span class="user-name"></span></h1>
@@ -25,7 +25,7 @@
           <input type="date" id="date-filter" name="night" value="2022-05-15" min="2022-05-01" max="2022-06-18" onkeydown="return false" required>
         </div>
         <div class="room-filter">
-          <label for="room-type-slection">choose a roome type:</label>
+          <label for="room-type-slection">choose a room type:</label>
           <select id="select1" name="room-type-selection" class="room-type-selection">
             <option value="any">any</option>
             <option value="junior">junior suite</option>
@@ -41,17 +41,19 @@
   <main>
     <section class="login-page">
       <section class="login-form">
+        <p class="form-heading">welcome to the seaside hotel</p>
         <div class="form-styling">
           <label for="uname" class="form-label">username:</label>
-          <input type="text" placeholder="enter username" name="uname" required>
+          <input class="username" type="text" placeholder="enter username" name="uname" required>
           <label for="psw" class="form-label">password:</label>
-          <input type="text" placeholder="enter password" name="psw" required>
+          <input class="password" type="text" placeholder="enter password" name="psw" required>
           <button class="login">login</button>
+          <p class="user-error"></p>
         </div>
       </section>
     </section>
     <section class="homepage hidden">
-      <h2>your bookings:</h2>
+      <h2>your bookings, past and future:</h2>
       <div class="user-bookings"></div>
     </section>
     <section class="book-page hidden">

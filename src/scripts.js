@@ -1,9 +1,5 @@
 import './css/styles.css';
-
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-// import './images/turing-logo.png'
-
-import {usersPromise, bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
+import {bookingsPromise, roomsPromise, postBooking, getPromise} from "./apiCalls";
 import User from "./classes/User.js";
 import Hotel from "./classes/Hotel.js";
 
@@ -32,13 +28,14 @@ let possibleBookings = document.querySelector('.possible-bookings');
 let emptySearchMessage = document.querySelector('.filter-subheading');
 let followUp = document.querySelector('.followup');
 let errorMessage = document.querySelector('.error');
+let loginButton = document.querySelector('.login');
+let username = document.querySelector('.username');
+let password = document.querySelector('.password');
+let userError = document.querySelector('.user-error');
+let loginPage = document.querySelector('.login-page');
+let header = document.querySelector('.header');
 
 // Event Listeners -------------------------------------------------------------
-// Revisit once there is a 'login' page to refactor. Will probably want this to run on submission of user information instead of page load
-window.onload = () =>{
-  loadWindow();
-};
-
 bookPageButton.addEventListener('click', function() {
   findRoomsAvail();
   toggleBookPage();
@@ -68,6 +65,10 @@ possibleBookings.addEventListener('click', function(e) {
   };
 });
 
+loginButton.addEventListener('click', function() {
+  checkLogin();
+});
+
 // Event Handlers and Functions ------------------------------------------------
 const showElement = elements => {
   elements.forEach(element => element.classList.remove("hidden"));
@@ -77,10 +78,10 @@ const hideElement = elements => {
   elements.forEach(element => element.classList.add("hidden"));
 };
 
-const loadWindow = () => {
+const loadInfo = () => {
   Promise.all(
     [
-      usersPromise,
+      getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`),
       bookingsPromise,
       roomsPromise
     ]
@@ -99,6 +100,7 @@ const loadWindow = () => {
     updateUserSum();
     updateUserName();
     displayBookedThumbnails();
+    hideLogin();
   });
 };
 
@@ -200,17 +202,8 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-  // console.log(currentUser);
   let currentButton = document.getElementById(`${id}`)
   hideElement([currentButton]);
-
-  // Would then invoke the post function here
-  // Update the current user by adding this instance of booking to their bookedRoomsInfo array
-    // push a new instance with number, bedsize, bidet, bookingID, constPerNight, date, numBeds, type
-    // Could look like making an object, making a new instance of room with this object, then adding the correct data and an ID
-
-    // Rerun the methods to update rooms available by date and type?
-  // Set time out to refresh booking page?
 };
 
 const postToBookings = (id) => {
@@ -242,6 +235,61 @@ const postToBookings = (id) => {
       errorMessage.innerText = 'we\'re sorry - there was a problem booking your room';
     })
   });
+};
+
+const checkLogin = () => {
+  let num = findCorrectUsername();
+  checkCustomerPassword();
+  if (num > 0 && num < 51 && checkCustomerPassword() === true) {
+    userError.innerText = '';
+    loadInfo();
+  } else {
+    userError.innerText = 'please enter a valid username and password';
+  }
+};
+
+const findCorrectUsername = () => {
+  if (username.value.includes('customer')) {
+    userError.innerText = '';
+    return findCustomerNum();
+  } else if (username.value.includes('manager')) {
+    // allow for manager functionality here
+  } else {
+    userError.innerText = 'please enter a valid username and password';
+  }
+};
+
+const findCustomerNum = () => {
+  let userNum = username.value;
+  userNum = userNum.split('');
+  userNum.splice(0, 8);
+
+  if (userNum[0] === '0') {
+    userNum.splice(0, 1)
+  }
+
+  userNum = userNum.join('');
+
+  if (userNum > 0 && userNum < 51) {
+    userError.innerText = '';
+    return userNum;
+  } else {
+    userError.innerText = 'please enter a valid username and password';
+    return false;
+  }
+};
+
+const checkCustomerPassword = () => {
+  if (password.value === 'overlook2021') {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const hideLogin = () => {
+  hideElement([loginPage]);
+  showElement([header, homePage]);
 };
 
 
