@@ -1,8 +1,12 @@
+let loadError = document.querySelector('.load-error');
+
 let getPromise = (url) => {
   return fetch(url)
   .then(response => response.json())
-  .catch(err => console.log(error));
-}
+  .catch(err => {
+    loadError.innerText = 'we\'re so sorry - there was an error loading your data, please try again later';
+  });
+};
 
 
 // let usersPromise = getPromise(`http://localhost:3001/api/v1/customers/${findCustomerNum()}`);
@@ -17,4 +21,4 @@ let postBooking = (bookingObj) => {
   })
 };
 
-export {bookingsPromise, roomsPromise, postBooking, getPromise};
+export {bookingsPromise, roomsPromise, postBooking, getPromise, loadError};

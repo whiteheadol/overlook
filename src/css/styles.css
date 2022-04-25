@@ -125,6 +125,11 @@ label {
   text-align: center;
 }
 
+.load-error {
+  color: red;
+  text-align: center;
+}
+
 .followup {
   font-size: 20px;
 }
@@ -147,7 +152,6 @@ label {
   height: 300px;
 }
 
-/* Check with eli for frosting info? */
 .booking-info, .to-book-info, .book-button-display, .book-button-display {
   align-items: center;
   background-color: #FFFFFF;
