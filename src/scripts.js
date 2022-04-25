@@ -45,9 +45,7 @@ homePageButton.addEventListener('click', function() {
 });
 
 filterButton.addEventListener('click', function() {
-  event.preventDefault();
-  findRoomsAvail();
-  displayPossibleBookings();
+  renderFilteredBookings();
 });
 
 possibleBookings.addEventListener('click', function(e) {
@@ -110,6 +108,12 @@ const renderHomePage = () => {
   displayBookedThumbnails();
   hideElement([bookPage, homePageButton, searchFields]);
   showElement([homePage, bookPageButton, greeting, userMoney]);
+};
+
+const renderFilteredBookings = () => {
+  event.preventDefault();
+  findRoomsAvail();
+  displayPossibleBookings();
 };
 
 const populateUserBookings = (bookings) => {
