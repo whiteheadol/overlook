@@ -43,18 +43,20 @@ My biggest challenge, is related to one of my wins, as understanding the timing 
   - Wave (accessibility)
 
 ## Features
-- When a user loads the browser, they should see a home page with a navigation bar and a display of different recipe thumbnails.
-- They are able to view more information about a specific recipe by clicking on that recipe's image.
-  - A recipe 'card' will load with the same image as well as ingredients, total recipe cost, and instructions. From here, they can decide to add the recipe to the list of recipes they'd like to cook, or they can return to the home page or favorite recipe page.
-- While on the home page, a user can also click a recipe's star to add or remove that recipe from their 'favorites'.
-- To refine their recipe search, a user can also use the **Filter Recipes** or **Search Recipes** buttons. This will allow them to search by a keyword or specific recipe tag within all of the recipes.
-- To view all of their favorites, a user can then click on the **Favorite Recipes** button.
-  - While on this page, they can then filter and search just their favorite recipes.
-- Clicking on **All Recipes** will take the user back to a list of all the available recipes.  
-- Clicking on **View Profile** will allow the user to view their personal pantry inventory as well as the recipes they've chosen to cook. They can view a thumbnail to see what ingredients they are missing, then add to their pantry inventory via a form on their profile page. When they add ingredients or 'cook' a recipe, their pantry will update accordingly.
+- When the browser first loads, the user will see a login page with two input fields. They can login with the following credentials:
+
+   `username: customer50` (any customer number between 1 & 50 is valid)
+
+   `password: overlook2021`
+
+- A successful login will load the user's dashboard, and an unsuccessful login will result in an error message.
+- Upon loading the user's dashboard, the user will see a personalized greeting, a list of all of their room bookings, the total amount they've spent on bookings, and a button that allows them to navigate to a new bookings page.
+- When they navigate to the new bookings page, they will see a new set of thumbnails as well as two search fields. Filling out these fields will allow them to narrow down their room search.
+- When they find a room they like, they can book it by clicking `book now`.
+- When a room is booked, it will disappear from the list of available rooms. Then, when a user navigates back to their dashboard, the total amount spent will be updated, and the new booking will appear in their booked thumbnails.
 
 ## Page Demo
-Adding a recipe to your favorites:
+Logging in to view a user dashboard:
 
 ![Favoriting a recipe](https://media.giphy.com/media/1NsLtAmPAbZIs9WU9E/giphy.gif)
 
