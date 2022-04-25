@@ -1,3 +1,102 @@
+# Overlook Hotel
+
+<img width="500" alt="hotel home page" src="https://user-images.githubusercontent.com/96206823/165134921-ab545828-f261-42e7-89a7-ddcf756e7c19.png">
+
+## Table of Contents
+
+  - [Introduction & Learning Goals](#introduction-&-learning-goals)
+  - [Learning Goals](#learning-goals)
+  - [Technologies](#technologies)
+  - [Features](#features)
+  - [Page Demo](#page-demo)
+  - [Possible Future Extensions](#possible-future-extensions)
+  - [Set Up](#set-up)
+  - [Contributors](#contributors)
+  - [Project Specs](#project-specs)
+  - [Project GitHub Repo](#project-github-repo)
+  - [Additional Resources](#additional-resources)
+
+## Introduction & Learning Goals
+The Overlook Hotel was a solo project assigned for Turing School of Software and Design's Front End Module 2. Students were given a seven day sprint to produce a hotel booking application with a minimum functionality laid out in the spec.
+
+The goals for students while completing this project included the following:
+- Incorporating Get and Post requests to communicate with a backend API
+- Utilizing effective object oriented programing
+- Writing comprehensive tests for each class, including both its properties and methods
+- Prioritizing their app's accessibility
+- Building in effective and comprehensive error handling
+
+Personally, my biggest wins were gaining a deeper understanding of fetch calls and their timing (we were not allowed to use async/await) and the hands on practice with error handling.
+
+My biggest challenge, is related to one of my wins, as understanding the timing of various Fetch calls was difficult. This project spec also provided much less guidance than with previous applications, and this was both challenging and exciting.
+
+## Technologies
+  - Javascript
+  - HTML
+  - CSS
+  - Mocha
+  - Chai
+  - Fetch API
+  - Webpack
+  - NPM
+  - Lighthouse (accessibility)
+  - Wave (accessibility)
+
+## Features
+- When a user loads the browser, they should see a home page with a navigation bar and a display of different recipe thumbnails.
+- They are able to view more information about a specific recipe by clicking on that recipe's image.
+  - A recipe 'card' will load with the same image as well as ingredients, total recipe cost, and instructions. From here, they can decide to add the recipe to the list of recipes they'd like to cook, or they can return to the home page or favorite recipe page.
+- While on the home page, a user can also click a recipe's star to add or remove that recipe from their 'favorites'.
+- To refine their recipe search, a user can also use the **Filter Recipes** or **Search Recipes** buttons. This will allow them to search by a keyword or specific recipe tag within all of the recipes.
+- To view all of their favorites, a user can then click on the **Favorite Recipes** button.
+  - While on this page, they can then filter and search just their favorite recipes.
+- Clicking on **All Recipes** will take the user back to a list of all the available recipes.  
+- Clicking on **View Profile** will allow the user to view their personal pantry inventory as well as the recipes they've chosen to cook. They can view a thumbnail to see what ingredients they are missing, then add to their pantry inventory via a form on their profile page. When they add ingredients or 'cook' a recipe, their pantry will update accordingly.
+
+## Page Demo
+Adding a recipe to your favorites:
+
+![Favoriting a recipe](https://media.giphy.com/media/1NsLtAmPAbZIs9WU9E/giphy.gif)
+
+
+## Possible Future Extensions
+- At the moment, a user is instantiated from an array of user objects, and the information for these user objects is pulled from a database. We would love to add functionality for a site visiter to actually provide their information and instantiate their own user object.
+- We would also love to add the ability for a user to rate the recipes they've cooked or to leave notes for themselves about the recipe.
+- Users are only able to filter by one tag at a time, but we hope to update this in the future so that they can filter by multiple tags at once.
+
+## Set Up
+1. Fork and clone this repo.
+2. Read this README thoroughly.
+3. Type `cd whats_cookin` to move into the root directory.
+4. run `npm install` to install neccessary dependencies.
+5. Run `npm start`.
+6. Copy the url given by running `npm start` and open in your browser.
+7. Enjoy exploring the recipe database.
+
+## Contributors
+- Stephanie Roe (GitHub: stephanie-roe)
+- Ross Landino (GitHub: mrlandino)
+- Olivia Whitehead (GitHub: whiteheadol)
+
+## Project Specs
+- The specs parts one and two of this project can be found [here](https://frontend.turing.edu/projects/What%27sCookin-PartOne.html) and [here](https://frontend.turing.edu/projects/whats-cookin-part-two.html).
+
+- The backend API can be found [here](https://github.com/turingschool-examples/whats-cookin-api).
+
+## Project GitHub Repo
+- The project repo can be found [here](https://github.com/whiteheadol/whats-cookin).
+
+## Additional Resources
+- [Figma Wireframe](https://www.figma.com/file/ZpXIc9Qrf5QWYVkUAs7iJ0/Whats-Cookin-Mod-2-Group-Proj?node-id=0%3A1)
+- [Standup Log](https://docs.google.com/spreadsheets/d/1MZotFEv9hxh9mh32oMXeKmdRtaM0Y_BEl9TlVCWziGg/edit?usp=sharing)
+- [Project Board](https://github.com/whiteheadol/whats-cookin/projects/1)
+
+
+
+
+
+
+
 # Webpack Starter Kit
 This is a test.
 
