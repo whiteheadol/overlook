@@ -37,24 +37,15 @@ let header = document.querySelector('.header');
 
 // Event Listeners -------------------------------------------------------------
 bookPageButton.addEventListener('click', function() {
-  findRoomsAvail();
-  toggleBookPage();
-  emptySearchMessage.innerText = '';
-  followUp.innerText = '';
+  renderBookingsPage();
 });
 
 homePageButton.addEventListener('click', function() {
-  updateUserSum();
-  updateUserName();
-  displayBookedThumbnails();
-  hideElement([bookPage, homePageButton, searchFields]);
-  showElement([homePage, bookPageButton, greeting, userMoney]);
+  renderHomePage();
 });
 
 filterButton.addEventListener('click', function() {
-  event.preventDefault();
-  findRoomsAvail();
-  displayPossibleBookings();
+  renderFilteredBookings();
 });
 
 possibleBookings.addEventListener('click', function(e) {
@@ -104,6 +95,27 @@ const loadInfo = () => {
   });
 };
 
+const renderBookingsPage = () => {
+  findRoomsAvail();
+  toggleBookPage();
+  emptySearchMessage.innerText = '';
+  followUp.innerText = '';
+};
+
+const renderHomePage = () => {
+  updateUserSum();
+  updateUserName();
+  displayBookedThumbnails();
+  hideElement([bookPage, homePageButton, searchFields]);
+  showElement([homePage, bookPageButton, greeting, userMoney]);
+};
+
+const renderFilteredBookings = () => {
+  event.preventDefault();
+  findRoomsAvail();
+  displayPossibleBookings();
+};
+
 const populateUserBookings = (bookings) => {
   currentUser.addBookingsIds(bookingsData);
   currentUser.addBookedRoomInfo(roomsData);
@@ -129,7 +141,6 @@ const updateRoomInfo = (rooms) => {
 };
 
 const displayBookedThumbnails = () => {
-  // currentUser.addBookedRoomInfo(roomsData);
   let bookingsHTML = "";
   currentUser.bookedRoomsInfo.forEach((booking) => {
     bookingsHTML += `<div class="booking-thumbnail" id=${booking.id}>
@@ -202,7 +213,7 @@ const updateBookingText = (id) => {
   let textToChange = document.getElementById(`${newId}`);
   textToChange.innerHTML += `<p class="booked">you've booked this room!</p>`;
 
-  let currentButton = document.getElementById(`${id}`)
+  let currentButton = document.getElementById(`${id}`);
   hideElement([currentButton]);
 };
 
@@ -233,7 +244,7 @@ const postToBookings = (id) => {
     })
     .catch(error => {
       errorMessage.innerText = 'we\'re sorry - there was a problem booking your room';
-    })
+    });
   });
 };
 
@@ -245,7 +256,7 @@ const checkLogin = () => {
     loadInfo();
   } else {
     userError.innerText = 'please enter a valid username and password';
-  }
+  };
 };
 
 const findCorrectUsername = () => {
@@ -292,5 +303,11 @@ const hideLogin = () => {
   showElement([header, homePage]);
 };
 
+
+// Manager page pseudocoding:
+// First, build in functionality for a manager to login, and attach a different Fetch request to fire if it is a manager who logged in
+// This different fetch request would need to get the same bookings and rooms data, but would need to fetch ALL users, instead of just a single user
+// From there, load an empty dashboard and no bookings page functionality, styling should be very similar to user page
+// I don't know if I want to change the inner html of the existing page, or build out an entire new page - will keep brainstorming?
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
