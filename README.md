@@ -67,17 +67,19 @@ Search for a room by type:
 
 ## Possible Future Extensions
 - I hope to build out **manager** functionality in the future, as laid out in the extension section of the spec.
-- I also hope to add a feature that will allow the user to sort their booked rooms by data, either ascending or descending.
+- I also hope to add a feature that will allow the user to sort their booked rooms by date, either ascending or descending.
 
-FIX THIS!!!!
 ## Set Up
-1. Fork and clone this repo.
-2. Read this README thoroughly.
-3. Type `cd whats_cookin` to move into the root directory.
-4. run `npm install` to install neccessary dependencies.
-5. Run `npm start`.
-6. Copy the url given by running `npm start` and open in your browser.
-7. Enjoy exploring the recipe database.
+1. Clone this repo to your local machine.
+2. `cd` into your local directory.
+3. Run `npm install`.
+4. Run `npm start`.
+5. Clone the [project's API](https://github.com/turingschool-examples/overlook-api) to your local machine as well.
+6. `cd` into the API directory.
+7. Run `npm install` in the API directory.
+8. Run `npm start` in the API directory.
+9. Once both directories are running in separate tabs of your terminal, copy the local address from the main project's directory into your browser.
+10. Enjoy exploring the application!
 
 ## Contributors
 - Olivia Whitehead (GitHub: whiteheadol)
@@ -93,35 +95,3 @@ FIX THIS!!!!
 ## Additional Resources
 - [Project Board](https://github.com/whiteheadol/overlook/projects/1)
 - Ocean image sourced from Pexels, photographer found [here](https://www.pexels.com/@matthardy/).
-
----
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
-
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
