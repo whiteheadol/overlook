@@ -302,6 +302,8 @@ const hideLogin = () => {
   hideElement([loginPage]);
   showElement([header, homePage]);
 };
+<<<<<<< Updated upstream
+=======
 
 
 // Manager page pseudocoding:
@@ -311,3 +313,4 @@ const hideLogin = () => {
 // I don't know if I want to change the inner html of the existing page, or build out an entire new page - will keep brainstorming?
 
 // On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
+>>>>>>> Stashed changes

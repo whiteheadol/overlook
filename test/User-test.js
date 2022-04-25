@@ -39,11 +39,13 @@ describe('User', () => {
     expect(user1.bookingsIds).to.deep.equal([]);
 
     user1.addBookingsIds(bookings);
+
     expect(user1.bookingsIds[0]).to.deep.equal(bookings[0]);
 
     expect(user2.bookingsIds).to.deep.equal([]);
 
     user2.addBookingsIds(bookings);
+    
     expect(user2.bookingsIds[0]).to.deep.equal(bookings[1]);
     expect(user2.bookingsIds[1]).to.deep.equal(bookings[2]);
   });

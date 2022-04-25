@@ -8,7 +8,7 @@ class Room {
     this.costPerNight = roomObj.costPerNight;
     this.date = '';
     this.bookingID = '';
-  }
+  };
 };
 
 export default Room;
