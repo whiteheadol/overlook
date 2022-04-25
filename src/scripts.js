@@ -302,3 +302,15 @@ const hideLogin = () => {
   hideElement([loginPage]);
   showElement([header, homePage]);
 };
+<<<<<<< Updated upstream
+=======
+
+
+// Manager page pseudocoding:
+// First, build in functionality for a manager to login, and attach a different Fetch request to fire if it is a manager who logged in
+// This different fetch request would need to get the same bookings and rooms data, but would need to fetch ALL users, instead of just a single user
+// From there, load an empty dashboard and no bookings page functionality, styling should be very similar to user page
+// I don't know if I want to change the inner html of the existing page, or build out an entire new page - will keep brainstorming?
+
+// On the home page: Figure out how to check if the booking date has already passed and change the opacity of the thumbnail for bookings that HAVE already passed
+>>>>>>> Stashed changes
