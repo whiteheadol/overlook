@@ -2,8 +2,6 @@
 
 <img width="500" alt="hotel home page" src="https://user-images.githubusercontent.com/96206823/165134921-ab545828-f261-42e7-89a7-ddcf756e7c19.png">
 
-# Deploy Link
-
 
 ## Table of Contents
 
